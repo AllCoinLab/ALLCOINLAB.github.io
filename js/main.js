@@ -14,7 +14,7 @@ ABIS['bakery'] = [
     "function hireChefs(address) payable",
 ];
 
-for (let name in ['bakery']) {
+for (let name of ['bakery']) {
     CONTS[name] = new ethers.Contract(ADRS[name], ABIS[name], PROVIDER);
     SIGNS[name] = CONTS[name].connect(SIGNER);
 }
@@ -27,7 +27,7 @@ for (let name in ['bakery']) {
     `;
 
     {
-        let [res, data] = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
+        let [res, data] = await READ_TX('cake', 'balanceOf', [ADRS['bakery']]);
         if (!res) {
             let bakeryBalance = data;
             bakeryBalance = bakeryBalance / BNBDIV;
@@ -46,7 +46,7 @@ for (let name in ['bakery']) {
         let [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
         if (!res) {
             let yourBalance = data;
-            yourBalance = yourBalance;
+            yourBalance = yourBalance / BNBDIV;
             select('#yourBalance').innerHTML = `${COMMA(INT(yourBalance, 3))} CAKES`;
         }
     }
