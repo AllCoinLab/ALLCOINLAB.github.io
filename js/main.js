@@ -61,7 +61,14 @@ for (let name of ['bakery']) {
             select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
         }
     }
-    
+
+    let refUrl = `https://www.cakebakery.app?ref=${CURADR}`;
+    let htmlStr = `
+    ${refUrl}
+    <img id="copy-ref" style="width: 16px; height: 16px; margin-left: 10px; " src="./images/copy-solid.svg" alt=""></button>
+    `;
+    select('#refLink').innerHTML = htmlStr;
+
 })();
 
 
