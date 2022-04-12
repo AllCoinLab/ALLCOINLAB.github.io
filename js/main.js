@@ -45,9 +45,9 @@ for (let name of ['bakery']) {
     {
         let [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
         if (!res) {
-            let yourBalance = data;
-            yourBalance = yourBalance / BNBDIV;
-            select('#yourBalance').innerHTML = `${COMMA(INT(yourBalance, 3))} CAKES`;
+            let yourReward = data;
+            yourReward = yourReward / BNBDIV;
+            select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
         }
     }
     
