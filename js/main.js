@@ -68,7 +68,7 @@ for (let name of ['bakery']) {
     <img id="copy-ref" style="width: 16px; height: 16px; margin-left: 10px; " src="./images/copy-solid.svg" alt=""></button>
     `;
     select('#refLink').innerHTML = htmlStr;
-
+    select('#refLink').onclick = async () => { copy(); };
 })();
 
 
