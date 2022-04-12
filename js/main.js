@@ -9,15 +9,24 @@
 (async () => {
     let bakeryAdr = "0xB043D6360c8b19d14ae619aEc329d8BCa852e549";
 
+    select('#desc').innerHTML = `
+    Delicious 10% daily return<br/>
+    Highest 20% referral bonus<br/>
+    Lowest 2.5% dev fee
+    `;
+
+    let bakeryBalance = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
+    bakeryBalance = bakeryBalance / BNBDIV;
+    select('#bakeryBalance').innerHTML = `${COMMA(INT(bakeryBalance, 3))} CAKES`;
+    
     await getCurAdr();
     if (CURADR == null) {
     // connect wallet button
     return;
     }
 
-    let bakeryBalance = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
-    bakeryBalance = bakeryBalance / BNBDIV;
-    select('#bakeryBalance').innerHTML = `${COMMA(INT(bakeryBalance, 3))}`;
+    
+    
 })();
 
 
