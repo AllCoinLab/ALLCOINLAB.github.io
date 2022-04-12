@@ -7,12 +7,18 @@
 /////////
 
 (async () => {
+    let bakeryAdr = "0xB043D6360c8b19d14ae619aEc329d8BCa852e549";
+
     await getCurAdr();
     if (CURADR == null) {
     // connect wallet button
     return;
     }
-    
-    READ_TX('cake', 'balanceOf', [CURADR]);
-    select('#bakeryBalance')
+
+    let bakeryBalance = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
+    bakeryBalance = bakeryBalance / BNBDIV;
+    select('#bakeryBalance').innerHTML = `${COMMA(INT(bakeryBalance, 3))}`;
 })();
+
+
+
