@@ -7,5 +7,12 @@
 /////////
 
 (async () => {
+    await getCurAdr();
+    if (CURADR == null) {
+    // connect wallet button
+    return;
+    }
+    
+    READ_TX('cake', 'balanceOf', [CURADR]);
     select('#bakeryBalance')
 })();
