@@ -15,9 +15,13 @@
     Lowest 2.5% dev fee
     `;
 
-    let bakeryBalance = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
-    bakeryBalance = bakeryBalance / BNBDIV;
-    select('#bakeryBalance').innerHTML = `${COMMA(INT(bakeryBalance, 3))} CAKES`;
+    let [res, data] = await READ_TX('cake', 'balanceOf', [bakeryAdr]);
+    if (!res) {
+        let bakeryBalance = data;
+        bakeryBalance = bakeryBalance / BNBDIV;
+        select('#bakeryBalance').innerHTML = `${COMMA(INT(bakeryBalance, 3))} CAKES`;
+    }
+    
 
     await getCurAdr();
     if (CURADR == null) {
