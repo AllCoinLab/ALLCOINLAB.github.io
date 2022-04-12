@@ -6,7 +6,6 @@
 
 /////////
 
-let CURADR;
 (async () => {
     let bakeryAdr = "0xB043D6360c8b19d14ae619aEc329d8BCa852e549";
 
