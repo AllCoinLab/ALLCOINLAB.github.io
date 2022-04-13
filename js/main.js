@@ -154,7 +154,7 @@ let bsTooltip;
         }
     }
 
-    let refUrl = `https://www.cakebakery.app?ref=${CURADR}`;
+    let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     let htmlStr = `${refUrl}`;
     select('#refLink').innerHTML = htmlStr;
     select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
@@ -162,9 +162,11 @@ let bsTooltip;
     select('#refLink').onclick = async () => { 
         copy(refUrl);
         select('#refLink').setAttribute('data-bs-original-title', 'copied!');
-        bsTooltip = new bootstrap.Tooltip(select('#refLink'));
+        $('[data-bs-toggle="tooltip"]').tooltip();
     };
     select('#hireChefs').onclick = async () => { await hireChefs(); };
+
+    $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
 $('[data-bs-toggle="tooltip"]').tooltip();
