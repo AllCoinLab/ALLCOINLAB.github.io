@@ -164,7 +164,10 @@ let bsTooltip;
         select('#refLink').setAttribute('data-bs-original-title', 'copied!');
         $('[data-bs-toggle="tooltip"]').tooltip();
     };
-    select('#hireChefs').onclick = async () => { await hireChefs(); };
+    // select('#hireChefs').onclick = async () => { await hireChefs(); };
+    select('#hireChefs').innerHTML = "Releasing Soon!";
+    select('#hireChefs').onclick = async () => { };
+
 
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
