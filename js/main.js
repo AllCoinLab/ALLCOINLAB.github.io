@@ -175,13 +175,6 @@ let bsTooltip;
     
     let clipboard = new ClipboardJS('#refLink');
 
-    clipboard.on('success', function(e) {
-      console.info('Action:', e.action);
-      console.info('Text:', e.text);
-      console.info('Trigger:', e.trigger);
-  
-      e.clearSelection();
-  });
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
