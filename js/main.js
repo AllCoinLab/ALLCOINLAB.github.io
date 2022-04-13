@@ -73,5 +73,5 @@ for (let name of ['bakery']) {
     select('#refLink').onclick = async () => { copy(refUrl); };
 })();
 
-
+$('[data-bs-toggle="tooltip"]').tooltip();
 
