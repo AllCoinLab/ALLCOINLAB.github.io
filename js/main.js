@@ -63,10 +63,7 @@ for (let name of ['bakery']) {
     }
 
     let refUrl = `https://www.cakebakery.app?ref=${CURADR}`;
-    let htmlStr = `
-    ${refUrl}
-    <img id="copy-ref" style="width: 16px; height: 16px; margin-left: 10px; " src="./images/copy-solid.svg" alt=""></button>
-    `;
+    let htmlStr = `${refUrl}`;
     select('#refLink').innerHTML = htmlStr;
     select('#refLink').dataBsToggle = 'tooltip';
     select('#refLink').dataBsTitle = 'Click to copy';
