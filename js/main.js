@@ -168,6 +168,7 @@ let bsTooltip;
     select('#hireChefs').innerHTML = "Releasing Soon!";
     select('#hireChefs').onclick = async () => { };
 
+    select('#twtLink').onclick = async () => { alert("Coming Soon") };
 
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
