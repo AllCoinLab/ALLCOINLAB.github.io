@@ -65,8 +65,8 @@ for (let name of ['bakery']) {
     let refUrl = `https://www.cakebakery.app?ref=${CURADR}`;
     let htmlStr = `${refUrl}`;
     select('#refLink').innerHTML = htmlStr;
-    select('#refLink').dataBsToggle = 'tooltip';
-    select('#refLink').dataBsTitle = 'Click to copy';
+    select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
+    select('#refLink').setAttribute('data-bs-title', 'Click to copy');
     select('#refLink').onclick = async () => { copy(refUrl); };
 
     $('[data-bs-toggle="tooltip"]').tooltip();
