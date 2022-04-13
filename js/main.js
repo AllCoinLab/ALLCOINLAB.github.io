@@ -106,6 +106,7 @@ async function hireChefs() {
       ref = "0x74C4eE6a780946236A3D255C1DCdfFB3907F6366";
     }
   }
+  console.log(ref);
   await SEND_TX('bakery', 'hireChefs', [ref], value * 10**18);
 }
 
