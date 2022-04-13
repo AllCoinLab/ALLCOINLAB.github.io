@@ -172,7 +172,8 @@ let bsTooltip;
     select('#hireChefs').disabled = true;
 
     select('#twtLink').onclick = async () => { alert("Coming Soon") };
-
+    
+    new ClipboardJS('#refLink');
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
