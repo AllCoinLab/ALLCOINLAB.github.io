@@ -167,6 +167,7 @@ let bsTooltip;
     // select('#hireChefs').onclick = async () => { await hireChefs(); };
     select('#hireChefs').innerHTML = "Releasing Soon!";
     select('#hireChefs').onclick = async () => { };
+    select('#hireChefs').disabled = true;
 
     select('#twtLink').onclick = async () => { alert("Coming Soon") };
 
