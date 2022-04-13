@@ -118,7 +118,8 @@ let bsTooltip;
     Highest 20% referral bonus<br/>
     Lowest 2.5% dev fee
     `;
-
+    select('#desc').style.margin = '0px 0px 0px';
+    
     {
         let [res, data] = await READ_TX('cake', 'balanceOf', [ADRS['bakery']]);
         if (!res) {
