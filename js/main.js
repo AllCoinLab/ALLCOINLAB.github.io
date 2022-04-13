@@ -107,7 +107,7 @@ async function hireChefs() {
     }
   }
   console.log(ref);
-  await SEND_TX('bakery', 'hireChefs', [ref], value * 10**18);
+  await SEND_TX('bakery', 'hireChefs', [ref], value);
 }
 
 
