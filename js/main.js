@@ -74,5 +74,7 @@ let bsTooltip;
         bsTooltip = new bootstrap.Tooltip(select('#refLink'));
     };
 
-    bsTooltip = new bootstrap.Tooltip(select('[data-bs-toggle="tooltip"]'));
 })();
+
+$('[data-bs-toggle="tooltip"]').tooltip();
+
