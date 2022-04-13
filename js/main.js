@@ -67,7 +67,10 @@ for (let name of ['bakery']) {
     select('#refLink').innerHTML = htmlStr;
     select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
     select('#refLink').setAttribute('data-bs-title', 'Click to copy');
-    select('#refLink').onclick = async () => { copy(refUrl); };
+    select('#refLink').onclick = async () => { 
+        copy(refUrl);
+        select('#refLink').setAttribute('data-bs-title', 'copied!');
+    };
 
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
