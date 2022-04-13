@@ -68,8 +68,8 @@ for (let name of ['bakery']) {
     <img id="copy-ref" style="width: 16px; height: 16px; margin-left: 10px; " src="./images/copy-solid.svg" alt=""></button>
     `;
     select('#refLink').innerHTML = htmlStr;
-    select('#refLink').data-bs-toggle = 'tooltip';
-    select('#refLink').data-bs-title = 'Click to copy';
+    select('#refLink').dataBsToggle = 'tooltip';
+    select('#refLink').dataBsTitle = 'Click to copy';
     select('#refLink').onclick = async () => { copy(refUrl); };
 })();
 
