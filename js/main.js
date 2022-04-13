@@ -21,6 +21,7 @@ for (let name of ['bakery']) {
     SIGNS[name] = CONTS[name].connect(SIGNER);
 }
 
+let bsTooltip;
 (async () => {
     select('#desc').innerHTML = `
     Delicious 10% daily return<br/>
@@ -70,11 +71,8 @@ for (let name of ['bakery']) {
     select('#refLink').onclick = async () => { 
         copy(refUrl);
         select('#refLink').setAttribute('data-bs-original-title', 'copied!');
-        $('[data-bs-toggle="tooltip"]').tooltip();
+        bsTooltip = new bootstrap.Tooltip(select('#refLink'));
     };
 
-    $('[data-bs-toggle="tooltip"]').tooltip();
+    bsTooltip = new bootstrap.Tooltip(select('[data-bs-toggle="tooltip"]'));
 })();
-
-$('[data-bs-toggle="tooltip"]').tooltip();
-
