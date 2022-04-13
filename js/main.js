@@ -69,7 +69,8 @@ for (let name of ['bakery']) {
     select('#refLink').setAttribute('data-bs-title', 'Click to copy');
     select('#refLink').onclick = async () => { 
         copy(refUrl);
-        select('#refLink').setAttribute('data-bs-title', 'copied!');
+        $(element).attr('data-original-title', newValue).tooltip('show');
+        select('#refLink').setAttribute('data-bs-original-title', 'copied!');
     };
 
     $('[data-bs-toggle="tooltip"]').tooltip();
