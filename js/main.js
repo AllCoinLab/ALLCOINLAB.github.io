@@ -15,6 +15,7 @@ ABIS['bakery'] = [
 
     "function getMyMiners(address) view returns (uint256)",
     "function getMyEggs(address) view returns (uint256)",
+    "function calculateEggSell(uint256) view returns (uint256)",
 
     "event ChefsMoreHired(address adr, uint256 chefsCount)",
 	  "event Referred(address adr, address ref, uint256 amount)",
@@ -26,6 +27,40 @@ for (let name of ['bakery']) {
     SIGNS[name] = CONTS[name].connect(SIGNER);
 }
 
+
+let events = [];
+async function addEvent(name, event_) {
+  if (name == 'ChefsMoreHired') {
+    let adr = event_[0];
+    let chefsCount = event_[1];
+    events.unshift(`${SHORTADR(adr)} hired ${COMMA(INT(chefsCount))}!`);
+  }
+  if (name == 'Referred') {
+    let adr = event_[0];
+    let ref = event_[1];
+    let amount = event_[2];
+    let cakeAmount = await READ_TX('bakery', 'calculateEggSell', [amount]);
+    events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 5)}!)`);
+  }
+
+  if (name == 'CakeEaten') {
+    let adr = event_[0];
+    let amount = event_[1];
+    events.unshift(`${SHORTADR(adr)} ate ${INT(cakeAmount, 5)}!`);
+  }
+
+
+  if (events.length == 10) {
+    events.pop();
+  }
+
+  let htmlStr = ``;
+  for (let event of events) {
+    htmlStr += event + '<br/>';
+  }
+
+  select('#events').innerHTML = htmlStr;
+}
 
 let lastBlock;
 let lastSupply = 0;
@@ -52,46 +87,43 @@ async function eventBoard() {
   }
    
   for (var idy = 0; idy < 10; idy++) {
-      try {
-          txLogs = await CONTS['web3'].queryFilter(buyFilter, lastBlock, lastBlock+1);
-          break;
-      } catch {
-          DELAY(100);
-      }
+    try {
+        txLogs = await CONTS['bakery'].queryFilter(hireFilter, lastBlock, lastBlock+1);
+        break;
+    } catch {
+        DELAY(100);
+    }
   }
 
   for (var idy = 0; idy < txLogs.length; idy++) {
-    let adr = txLogs[idy].args[1];  
-    if (adr == '0x1C57a30c8E1aFb11b28742561afddAAcF2aBDfb7') {
-      continue;
-    }
-
-    if (adr == ADRS['web3']) {
-      continue;
-    }
-
-    let amount = txLogs[idy].args[2];
-    await addEvent('buy', [adr, amount]);
+    await addEvent('ChefsMoreHired', txLogs[idy].args);
   }
   
   for (var idy = 0; idy < 10; idy++) {
-      try {
-          txLogs = await CONTS['web3'].queryFilter(rebaseFilter, lastBlock, lastBlock+1);
-          break;
-      } catch {
-          DELAY(100);
-      }
+    try {
+        txLogs = await CONTS['bakery'].queryFilter(refFilter, lastBlock, lastBlock+1);
+        break;
+    } catch {
+        DELAY(100);
+    }
   }
   for (var idy = 0; idy < txLogs.length; idy++) {
-    let curSupply = txLogs[idy].args[1];
-    if (lastSupply == 0) {
-      lastSupply = curSupply;
-      continue;
-    }
-    
-    await addEvent('rebase', [lastSupply, curSupply]);
-    lastSupply = curSupply;
+    await addEvent('Referred', txLogs[idy].args);
   }
+
+  for (var idy = 0; idy < 10; idy++) {
+    try {
+        txLogs = await CONTS['bakery'].queryFilter(eatFilter, lastBlock, lastBlock+1);
+        break;
+    } catch {
+        DELAY(100);
+    }
+  }
+  for (var idy = 0; idy < txLogs.length; idy++) {
+    await addEvent('CakeEaten', txLogs[idy].args);
+  }
+
+
   lastBlock += 1;
 }
 
@@ -197,6 +229,8 @@ let bsTooltip;
       }, 3000);
     };
     new ClipboardJS('#refLinkTitle');
+    
+    setInterval(eventBoard, 10000);
     
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
