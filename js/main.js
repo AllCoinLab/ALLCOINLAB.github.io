@@ -282,13 +282,21 @@ let bsTooltip;
       topChefsDiv.innerHTML = htmlStr;
       topChefsDiv.style.margin = '10px auto';
       select('.css-kvjy6w').append(topChefsDiv);
-
+      
       htmlStr = '';
       for (var idx = 0; idx < 10; idx++) {
         try {
-          let topChef = await READ_TX('bakery', '_topChefs', [idx]);
-          let topChefCount = await READ_TX('bakery', '_topChefCounts', [idx]);
-          htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS)`; 
+          let [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
+          if (res) {
+            break;
+          }
+          let topChef = data;
+          let [res, data] = await READ_TX('bakery', '_topChefCounts', [idx]);
+          if (res) {
+            break;
+          }
+          let topChefCount = data;
+          htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS) <br/>`; 
         } catch (e) {
           break;
         }
