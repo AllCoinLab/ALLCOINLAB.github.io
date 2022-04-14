@@ -17,6 +17,9 @@ ABIS['bakery'] = [
     "function getMyEggs(address) view returns (uint256)",
     "function calculateEggSell(uint256) view returns (uint256)",
 
+    "function _topChefs(uint256) view returns (address)",
+    "function _topChefCounts(uint256) view returns (uint256)",
+
     "event ChefsMoreHired(address adr, uint256 chefsCount)",
 	  "event Referred(address adr, address ref, uint256 amount)",
     "event CakeEaten(address adr, uint256 amount)",
@@ -255,7 +258,7 @@ let bsTooltip;
       </div>
       `;
       eventsDiv.innerHTML = htmlStr;
-      select('.css-kvjy6w').innerHTML += eventsDiv;
+      select('.css-kvjy6w').append(eventsDiv);
     }
 
     $('[data-bs-toggle="tooltip"]').tooltip();
