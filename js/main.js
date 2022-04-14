@@ -227,17 +227,8 @@ let bsTooltip;
 
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     let htmlStr = `${refUrl}`;
-    select('#refLink').innerHTML = htmlStr;
-    // select('#refLink').setAttribute('data-clipboard-target', '#refLink');
-    // select('#refLink').setAttribute('data-clipboard-text', refUrl);
-    // select('#refLink').onclick = async () => { 
-    //     copy(refUrl);
-    //     select('#refLink').setAttribute('data-bs-original-title', 'copied!');
-    //     $('[data-bs-toggle="tooltip"]').tooltip();
-    // };
+    select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
     select('#hireChefs').onclick = async () => { await hireChefs(); };
-    // select('#hireChefs').innerHTML = "Releasing Soon!";
-    // select('#hireChefs').onclick = async () => { };
     select('#hireChefs').disabled = false;
 
     select('#twtLink').onclick = async () => { alert("Coming Soon!"); };
