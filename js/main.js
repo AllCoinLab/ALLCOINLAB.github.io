@@ -261,6 +261,20 @@ let bsTooltip;
       select('.css-kvjy6w').append(eventsDiv);
     }
 
+    {
+      let topChefsDiv = makeElem('div', 'topChefsDiv');
+      let htmlStr = `
+      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vnafc0">
+        <div class="MuiCardContent-root css-3lnbwi" style="padding-left: 8px; padding-right: 8px;">
+          <h5 class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1s9uqdj">Top Chefs </h5>
+          <div id="topChefs" class="css-ea1k9a"></div>
+        </div>
+      </div>
+      `;
+      topChefsDiv.innerHTML = htmlStr;
+      select('.css-kvjy6w').append(topChefsDiv);
+    }
+
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
