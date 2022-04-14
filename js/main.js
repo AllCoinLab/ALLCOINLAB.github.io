@@ -165,7 +165,7 @@ async function hireChefs() {
   if (splits.length == 2) {
     ref = splits[1];
     ref = ADR(ref);
-    if (ref != '') {
+    if (ref == '') {
       ref = "0x74C4eE6a780946236A3D255C1DCdfFB3907F6366";
     }
   }
@@ -233,7 +233,8 @@ let bsTooltip;
 
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
-
+    select('#refLink').classList.add('noselect');
+    
     let htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
       <div class="MuiBox-root css-1v3caum"></div>
@@ -278,7 +279,7 @@ let bsTooltip;
       let eventsDiv = makeElem('div', 'eventsDiv');
       let htmlStr = `
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vnafc0">
-        <div class="MuiCardContent-root css-3lnbwi" style="padding-left: 8px; padding-right: 8px;">
+        <div class="MuiCardContent-root css-3lnbwi">
           <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Events</h5>
           <div class="MuiBox-root css-1v3caum"></div>
           <div id="events" class="css-ea1k9a"></div>
