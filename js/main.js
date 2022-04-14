@@ -163,7 +163,7 @@ async function hireChefs() {
   await SEND_TX('bakery', 'hireChefs', [ref], value);
 }
 
-
+let res, data;
 let bsTooltip;
 (async () => {
     select('#desc').innerHTML = `
@@ -175,7 +175,7 @@ let bsTooltip;
     select('#desc').style.margin = '0px 0px 0px';
 
     {
-        let [res, data] = await READ_TX('cake', 'balanceOf', [ADRS['bakery']]);
+        [res, data] = await READ_TX('cake', 'balanceOf', [ADRS['bakery']]);
         if (!res) {
             let bakeryBalance = data;
             bakeryBalance = bakeryBalance / BNBDIV;
@@ -184,7 +184,7 @@ let bsTooltip;
     }
     
     {
-        let [res, data] = await READ_TX('bakery', 'getMyMiners', [CURADR]);
+        [res, data] = await READ_TX('bakery', 'getMyMiners', [CURADR]);
         if (!res) {
             let chefBalance = data;
             chefBalance = chefBalance;
