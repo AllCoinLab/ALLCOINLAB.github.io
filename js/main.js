@@ -252,6 +252,7 @@ let bsTooltip;
         </div>
       </div>
       `;
+      eventsDiv.innerHTML = htmlStr;
       document.body.append(eventsDiv);
     }
 
