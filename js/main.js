@@ -254,7 +254,7 @@ let bsTooltip;
       select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-check-lg"></i>`;
       setTimeout(() => {
         select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
-      }, 3000);
+      }, 1000);
     };
     new ClipboardJS('#refLinkTitle');
     
