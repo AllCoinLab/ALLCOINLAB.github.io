@@ -33,7 +33,7 @@ async function addEvent(name, event_) {
   if (name == 'ChefsMoreHired') {
     let adr = event_[0];
     let chefsCount = event_[1];
-    events.unshift(`${SHORTADR(adr)} hired ${COMMA(INT(chefsCount))}!`);
+    events.unshift(`${SHORTADR(adr)} hired ${COMMA(INT(chefsCount))} Chefs!`);
   }
   if (name == 'Referred') {
     let adr = event_[0];
@@ -80,15 +80,22 @@ async function eventBoard() {
     return;
   }
 
-  let blockData = await PROVIDER.getBlock(lastBlock);
-  if (blockData == null) {
-    console.log('not yet', lastBlock);
+  for (CURBLOCK = lastBlock; CURBLOCK < lastBlock + 100; CURBLOCK++) {
+    DELAY(10);
+    let blockData = await PROVIDER.getBlock(CURBLOCK);
+    if (blockData == null) {
+      break;
+    }
+  }
+
+  if (CURBLOCK == lastBlock) {
+    console.log('not yet', CURBLOCK);
     return;
   }
    
   for (var idy = 0; idy < 10; idy++) {
     try {
-        txLogs = await CONTS['bakery'].queryFilter(hireFilter, lastBlock, lastBlock+1);
+        txLogs = await CONTS['bakery'].queryFilter(hireFilter, lastBlock, CURBLOCK);
         break;
     } catch {
         DELAY(100);
@@ -101,7 +108,7 @@ async function eventBoard() {
   
   for (var idy = 0; idy < 10; idy++) {
     try {
-        txLogs = await CONTS['bakery'].queryFilter(refFilter, lastBlock, lastBlock+1);
+        txLogs = await CONTS['bakery'].queryFilter(refFilter, lastBlock, CURBLOCK);
         break;
     } catch {
         DELAY(100);
@@ -113,7 +120,7 @@ async function eventBoard() {
 
   for (var idy = 0; idy < 10; idy++) {
     try {
-        txLogs = await CONTS['bakery'].queryFilter(eatFilter, lastBlock, lastBlock+1);
+        txLogs = await CONTS['bakery'].queryFilter(eatFilter, lastBlock, CURBLOCK);
         break;
     } catch {
         DELAY(100);
@@ -123,7 +130,7 @@ async function eventBoard() {
     await addEvent('CakeEaten', txLogs[idy].args);
   }
 
-  lastBlock += 1;
+  lastBlock = CURBLOCK;
 }
 
 async function hireChefs() {
@@ -244,7 +251,7 @@ let bsTooltip;
       `;
       document.body.append(eventsDiv);
     }
-    
+
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
