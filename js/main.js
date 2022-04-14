@@ -114,6 +114,7 @@ async function hireChefs() {
 let bsTooltip;
 (async () => {
     select('#desc').innerHTML = `
+    <span style="font-size:2rem; font-weight:800;">🍰Cake Bakery🍰</span><br/>
     Delicious 10% daily return<br/>
     Highest 20% referral bonus<br/>
     Lowest 2.5% Chef Salary
@@ -157,25 +158,25 @@ let bsTooltip;
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     let htmlStr = `${refUrl}`;
     select('#refLink').innerHTML = htmlStr;
-    select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
-    select('#refLink').setAttribute('data-bs-title', 'Click to copy');
-    select('#refLink').setAttribute('data-clipboard-target', '#refLink');
-    select('#refLink').setAttribute('data-clipboard-text', refUrl);
-    select('#refLink').onclick = async () => { 
-        copy(refUrl);
-        select('#refLink').setAttribute('data-bs-original-title', 'copied!');
-        $('[data-bs-toggle="tooltip"]').tooltip();
-    };
+    // select('#refLink').setAttribute('data-clipboard-target', '#refLink');
+    // select('#refLink').setAttribute('data-clipboard-text', refUrl);
+    // select('#refLink').onclick = async () => { 
+    //     copy(refUrl);
+    //     select('#refLink').setAttribute('data-bs-original-title', 'copied!');
+    //     $('[data-bs-toggle="tooltip"]').tooltip();
+    // };
     // select('#hireChefs').onclick = async () => { await hireChefs(); };
-    select('#hireChefs').innerHTML = "Releasing Soon!";
-    select('#hireChefs').onclick = async () => { };
-    select('#hireChefs').disabled = true;
+    // select('#hireChefs').innerHTML = "Releasing Soon!";
+    // select('#hireChefs').onclick = async () => { };
+    // select('#hireChefs').disabled = true;
 
-    select('#twtLink').onclick = async () => { alert("Coming Soon") };
+    select('#twtLink').onclick = async () => { alert("Coming Soon!"); };
     
     let clipboard = new ClipboardJS('#refLink');
 
     select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
+    select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
+    select('#refLink').setAttribute('data-bs-title', 'Click to copy');
     select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
     select('#refLinkTitle').setAttribute('data-clipboard-text', refUrl);
     select('#refLinkTitle').onclick = async () => {
