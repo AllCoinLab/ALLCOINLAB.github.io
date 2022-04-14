@@ -231,10 +231,9 @@ let bsTooltip;
     select('#twtLink').onclick = async () => { alert("Coming Soon!"); };
 
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
-    let htmlStr = `${refUrl}`;
     select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
 
-    htmlStr = `
+    let htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
       <div class="MuiBox-root css-1v3caum"></div>
       `;
