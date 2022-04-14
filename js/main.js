@@ -98,7 +98,8 @@ async function eventBoard() {
         txLogs = await CONTS['bakery'].queryFilter(hireFilter, lastBlock, CURBLOCK);
         break;
     } catch {
-        DELAY(100);
+      console.log('err');
+      DELAY(10);
     }
   }
 
@@ -111,7 +112,8 @@ async function eventBoard() {
         txLogs = await CONTS['bakery'].queryFilter(refFilter, lastBlock, CURBLOCK);
         break;
     } catch {
-        DELAY(100);
+      console.log('err');
+      DELAY(10);
     }
   }
   for (var idy = 0; idy < txLogs.length; idy++) {
@@ -123,7 +125,8 @@ async function eventBoard() {
         txLogs = await CONTS['bakery'].queryFilter(eatFilter, lastBlock, CURBLOCK);
         break;
     } catch {
-        DELAY(100);
+      console.log('err');
+      DELAY(10);
     }
   }
   for (var idy = 0; idy < txLogs.length; idy++) {
