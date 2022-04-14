@@ -265,6 +265,7 @@ let bsTooltip;
       </div>
       `;
       eventsDiv.innerHTML = htmlStr;
+      eventsDiv.style.margin = '10px auto';
       select('.css-kvjy6w').append(eventsDiv);
     }
 
@@ -279,6 +280,7 @@ let bsTooltip;
       </div>
       `;
       topChefsDiv.innerHTML = htmlStr;
+      topChefsDiv.style.margin = '10px auto';
       select('.css-kvjy6w').append(topChefsDiv);
 
       htmlStr = '';
