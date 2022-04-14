@@ -234,7 +234,7 @@ let bsTooltip;
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
     select('#refLink').classList.add('noselect');
-    
+
     let htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
       <div class="MuiBox-root css-1v3caum"></div>
@@ -308,7 +308,7 @@ let bsTooltip;
       select('.css-kvjy6w').append(topChefsDiv);
       
       htmlStr = '';
-      for (var idx = 0; idx < 10; idx++) {
+      for (var idx = 0; idx < 2; idx++) {
         try {
           [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
