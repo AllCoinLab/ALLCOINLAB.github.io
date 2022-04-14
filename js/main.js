@@ -123,7 +123,6 @@ async function eventBoard() {
     await addEvent('CakeEaten', txLogs[idy].args);
   }
 
-
   lastBlock += 1;
 }
 
@@ -232,6 +231,9 @@ let bsTooltip;
     
     setInterval(eventBoard, 10000);
     
+    let eventsDiv = makeElem('div', 'events');
+    document.body.append(eventsDiv);
+
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
