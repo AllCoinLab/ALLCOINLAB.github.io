@@ -234,7 +234,7 @@ let bsTooltip;
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
     select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
 
-    htmlStr = `
+    let htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
       <div class="MuiBox-root css-1v3caum"></div>
       `;
@@ -274,11 +274,6 @@ let bsTooltip;
     });
     
     setInterval(eventBoard, 2000);
-    htmlStr = `
-      <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
-      <div class="MuiBox-root css-1v3caum"></div>
-      `;
-    select('#refLinkTitle').innerHTML = htmlStr;
     {
       let eventsDiv = makeElem('div', 'eventsDiv');
       let htmlStr = `
