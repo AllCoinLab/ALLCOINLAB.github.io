@@ -298,7 +298,7 @@ let bsTooltip;
     {
       let topChefsDiv = makeElem('div', 'topChefsDiv');
       let htmlStr = `
-      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1x3lqes">
+      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vnafc0">
         <div class="MuiCardContent-root css-3lnbwi">
           <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Top Chefs</h5>
           <div id="topChefs" class="MuiBox-root css-1v3caum">
