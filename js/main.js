@@ -243,7 +243,7 @@ let bsTooltip;
     select('#refLinkTitle').style.cursor = "pointer";
     select('#refLinkTitle').setAttribute('data-bs-toggle', 'tooltip');
     select('#refLinkTitle').setAttribute('data-bs-title', 'Click to copy');
-    select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
+    // select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
     select('#refLinkTitle').setAttribute('data-clipboard-text', refUrl);
     select('#refLinkTitle').onclick = async () => {
       select('#refLinkTitle').innerHTML = `
