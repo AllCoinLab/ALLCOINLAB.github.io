@@ -175,6 +175,7 @@ let bsTooltip;
     let clipboard = new ClipboardJS('#refLink');
 
     select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
+    select('#refLinkTitle').style.cursor = "pointer";
     select('#refLinkTitle').setAttribute('data-bs-toggle', 'tooltip');
     select('#refLinkTitle').setAttribute('data-bs-title', 'Click to copy');
     select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
@@ -185,8 +186,6 @@ let bsTooltip;
         select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
       }, 3000);
     };
-    select('#refLinkTitle').style.cursor = "pointer";
-    
     new ClipboardJS('#refLinkTitle');
     
     $('[data-bs-toggle="tooltip"]').tooltip();
