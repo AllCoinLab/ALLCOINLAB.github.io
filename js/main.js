@@ -56,6 +56,7 @@ async function addEvent(name, event_) {
       let [res, data] = await READ_TX('bakery', 'calculateEggSell', [amount]);
       if (!res) {
         let cakeAmount = data;
+        cakeAmount = cakeAmount / BNBDIV;
         events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 8)} CAKES!)`);
       }
     }
