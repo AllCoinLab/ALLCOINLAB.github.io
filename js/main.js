@@ -184,7 +184,8 @@ let bsTooltip;
         select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
       }, 3000);
     };
-
+    new ClipboardJS('#refLinkTitle');
+    
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
