@@ -255,7 +255,7 @@ let bsTooltip;
       </div>
       `;
       eventsDiv.innerHTML = htmlStr;
-      document.body.append(eventsDiv);
+      select('#container').innerHTML += eventsDiv;
     }
 
     $('[data-bs-toggle="tooltip"]').tooltip();
