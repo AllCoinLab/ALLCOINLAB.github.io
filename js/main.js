@@ -256,6 +256,7 @@ let bsTooltip;
         <div class="MuiBox-root css-1v3caum"></div>
         `;
       }, 1000);
+      copy(refUrl);
     };
 
     let clip = new ClipboardJS('#refLinkTitle');
