@@ -244,7 +244,7 @@ let bsTooltip;
     
     let clipboard = new ClipboardJS('#refLink');
 
-    let htmlStr = `
+    htmlStr = `
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1x3lqes">
         <div class="MuiCardContent-root css-3lnbwi">
           <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
