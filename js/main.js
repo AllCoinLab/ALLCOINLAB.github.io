@@ -14,6 +14,7 @@ ABIS['bakery'] = [
     "function hireChefs(address) payable",
 
     "function getMyMiners(address) view returns (uint256)",
+    "function getMyEggs(address) view returns (uint256)",
 
     "event ChefsMoreHired(address adr, uint256 chefsCount)",
 	  "event Referred(address adr, address ref, uint256 amount)",
