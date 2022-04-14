@@ -273,6 +273,14 @@ let bsTooltip;
       `;
       topChefsDiv.innerHTML = htmlStr;
       select('.css-kvjy6w').append(topChefsDiv);
+
+      htmlStr = '';
+      for (var idx = 0; idx < 10; idx++) {
+        let topChef = await READ_TX('bakery', '_topChefs', [idx]);
+        let topChefCount = await READ_TX('bakery', '_topChefCounts', [idx]);
+        htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS)`; 
+      }
+      select('#topChefs').innerHTML = htmlStr;
     }
 
     $('[data-bs-toggle="tooltip"]').tooltip();
