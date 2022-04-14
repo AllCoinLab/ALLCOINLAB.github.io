@@ -31,6 +31,15 @@ for (let name of ['bakery']) {
 }
 
 
+function SHORTADR(adr, x=true, n=4) {
+  let shortAdr = '';
+  if (x) {
+    shortAdr += adr.slice(0, 2);
+  }
+  shortAdr += adr.slice(2, 2 + n) + '..' + adr.slice(-n);
+  return shortAdr;
+}
+
 let events = [];
 async function addEvent(name, event_) {
   if (name == 'ChefsMoreHired') {
@@ -308,7 +317,7 @@ let bsTooltip;
           htmlStr += `
           <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-8rnkcc">
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">TOP ${idx + 1}</p>
-            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${SHORTADR(topChef)}</p>
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${SHORTADR(topChef, x=true, n=2)}</p>
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${topChefCount} CHEFS</p>
           </div>
           `;
