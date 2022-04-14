@@ -257,6 +257,7 @@ let bsTooltip;
         `;
       }, 1000);
     };
+
     let clip = new ClipboardJS('#refLinkTitle');
     clip.on('success', function(e) {
       console.info('Action:', e.action);
@@ -272,7 +273,6 @@ let bsTooltip;
     });
     
     setInterval(eventBoard, 2000);
-    
     
     {
       let eventsDiv = makeElem('div', 'eventsDiv');
