@@ -40,7 +40,9 @@ async function addEvent(name, event_) {
     let ref = event_[1];
     let amount = event_[2];
     let cakeAmount = await READ_TX('bakery', 'calculateEggSell', [amount]);
-    events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 5)}!)`);
+    // events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 5)}!)`);
+    console.log(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${amount}, ${INT(cakeAmount, 5)}!)`);
+    events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)}`);
   }
 
   if (name == 'CakeEaten') {
