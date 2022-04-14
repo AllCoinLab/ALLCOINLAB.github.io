@@ -175,8 +175,8 @@ let bsTooltip;
     let clipboard = new ClipboardJS('#refLink');
 
     select('#refLinkTitle').innerHTML = `Referral Link <i class="bi bi-clipboard"></i>`;
-    select('#refLink').setAttribute('data-bs-toggle', 'tooltip');
-    select('#refLink').setAttribute('data-bs-title', 'Click to copy');
+    select('#refLinkTitle').setAttribute('data-bs-toggle', 'tooltip');
+    select('#refLinkTitle').setAttribute('data-bs-title', 'Click to copy');
     select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
     select('#refLinkTitle').setAttribute('data-clipboard-text', refUrl);
     select('#refLinkTitle').onclick = async () => {
