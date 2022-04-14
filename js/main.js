@@ -274,13 +274,18 @@ let bsTooltip;
     });
     
     setInterval(eventBoard, 2000);
-    
+    let htmlStr = `
+      <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
+      <div class="MuiBox-root css-1v3caum"></div>
+      `;
+    select('#refLinkTitle').innerHTML = htmlStr;
     {
       let eventsDiv = makeElem('div', 'eventsDiv');
       let htmlStr = `
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vnafc0">
         <div class="MuiCardContent-root css-3lnbwi" style="padding-left: 8px; padding-right: 8px;">
-          <h5 class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1s9uqdj">Events </h5>
+          <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Events</h5>
+          <div class="MuiBox-root css-1v3caum"></div>
           <div id="events" class="css-ea1k9a"></div>
         </div>
       </div>
