@@ -148,12 +148,20 @@ let bsTooltip;
     }
 
     {
-        let [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
-        if (!res) {
-            let yourReward = data;
-            yourReward = yourReward / BNBDIV;
-            select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
+      let [res, data] = await READ_TX('bakery', 'getMyEggs', [CURADR]);
+      if (!res) {
+        let eggCount = data;
+        if (0 < eggCount) {
+          let [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
+          if (!res) {
+              let yourReward = data;
+              yourReward = yourReward / BNBDIV;
+              select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
+          }
         }
+      }
+
+      
     }
 
     let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
