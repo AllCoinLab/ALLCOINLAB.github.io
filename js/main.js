@@ -95,7 +95,8 @@ async function eventBoard() {
 }
 
 async function hireChefs() {
-  let value = select('#inputAmount').value;
+  // let value = select('#inputAmount').value;
+  let value = select('input.css-fi9125').value;
   let url = location.href;
   let splits = url.split('ref=');
   let ref = "0x74C4eE6a780946236A3D255C1DCdfFB3907F6366";
