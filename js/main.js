@@ -270,13 +270,15 @@ let bsTooltip;
     {
       let topChefsDiv = makeElem('div', 'topChefsDiv');
       let htmlStr = `
-      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vnafc0">
-        <div class="MuiCardContent-root css-3lnbwi" style="padding-left: 8px; padding-right: 8px;">
-          <h5 class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1s9uqdj">Top Chefs </h5>
-          <div id="topChefs" class="css-ea1k9a"></div>
+      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1x3lqes">
+        <div class="MuiCardContent-root css-3lnbwi">
+          <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Top Chefs</h5>
+          <div id="topChefs" class="MuiBox-root css-1v3caum">
+          </div>
         </div>
       </div>
       `;
+
       topChefsDiv.innerHTML = htmlStr;
       topChefsDiv.style.margin = '10px auto';
       select('.css-kvjy6w').append(topChefsDiv);
@@ -294,7 +296,13 @@ let bsTooltip;
             break;
           }
           let topChefCount = data;
-          htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS) <br/>`; 
+          htmlStr += `
+          <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-8rnkcc">
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">TOP ${idx + 1}</p>
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${SHORTADR(topChef)}</p>
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${topChefCount} CHEFS</p>
+          </div>
+          `;
         } catch (e) {
           break;
         }
