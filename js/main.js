@@ -225,15 +225,14 @@ let bsTooltip;
       
     }
 
-    let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
-    let htmlStr = `${refUrl}`;
-    select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
     select('#hireChefs').onclick = async () => { await hireChefs(); };
     select('#hireChefs').disabled = false;
 
     select('#twtLink').onclick = async () => { alert("Coming Soon!"); };
-    
-    let clipboard = new ClipboardJS('#refLink');
+
+    let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
+    let htmlStr = `${refUrl}`;
+    select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
 
     htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
