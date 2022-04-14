@@ -318,7 +318,7 @@ let bsTooltip;
           <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-8rnkcc">
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">TOP ${idx + 1}</p>
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${SHORTADR(topChef, x=true, n=2)}</p>
-            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${topChefCount} CHEFS</p>
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${COMMA(topChefCount)} CHEFS</p>
           </div>
           `;
         } catch (e) {
