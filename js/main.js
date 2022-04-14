@@ -229,7 +229,7 @@ let bsTooltip;
     };
     new ClipboardJS('#refLinkTitle');
     
-    setInterval(eventBoard, 10000);
+    setInterval(eventBoard, 2000);
     
     let eventsDiv = makeElem('div', 'events');
     document.body.append(eventsDiv);
