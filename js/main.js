@@ -43,15 +43,15 @@ async function addEvent(name, event_) {
     let ref = event_[1];
     let amount = event_[2];
 
-    // if (ref != "0xe7F0704b198585B8777abe859C3126f57eB8C989") {
-    //   let [res, data] = await READ_TX('bakery', 'calculateEggSell', [amount]);
-    //   if (!res) {
-    //     let cakeAmount = data;
-    //     // events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 5)}!)`);
-    //     console.log(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${amount}, ${INT(cakeAmount, 5)}!)`);
-    //     events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)}`);
-    //   }
-    // }
+    if (ref != "0xe7F0704b198585B8777abe859C3126f57eB8C989") {
+      let [res, data] = await READ_TX('bakery', 'calculateEggSell', [amount]);
+      if (!res) {
+        let cakeAmount = data;
+        // events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${INT(cakeAmount, 5)}!)`);
+        console.log(`${SHORTADR(adr)} referred by ${SHORTADR(ref)} (Bonus: ${amount}, ${INT(cakeAmount, 5)}!)`);
+        events.unshift(`${SHORTADR(adr)} referred by ${SHORTADR(ref)}`);
+      }
+    }
 
   }
 
@@ -285,9 +285,13 @@ let bsTooltip;
 
       htmlStr = '';
       for (var idx = 0; idx < 10; idx++) {
-        let topChef = await READ_TX('bakery', '_topChefs', [idx]);
-        let topChefCount = await READ_TX('bakery', '_topChefCounts', [idx]);
-        htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS)`; 
+        try {
+          let topChef = await READ_TX('bakery', '_topChefs', [idx]);
+          let topChefCount = await READ_TX('bakery', '_topChefCounts', [idx]);
+          htmlStr += `TOP ${idx + 1}: ${SHORTADR(topChef)} (${topChefCount} CHEFS)`; 
+        } catch (e) {
+          break;
+        }
       }
       select('#topChefs').innerHTML = htmlStr;
     }
