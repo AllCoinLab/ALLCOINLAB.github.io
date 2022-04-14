@@ -116,7 +116,7 @@ let bsTooltip;
     select('#desc').innerHTML = `
     Delicious 10% daily return<br/>
     Highest 20% referral bonus<br/>
-    Lowest 2.5% dev fee
+    Lowest 2.5% Chef Salary
     `;
     select('#desc').style.margin = '0px 0px 0px';
 
