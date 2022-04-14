@@ -200,11 +200,11 @@ let bsTooltip;
     }
 
     {
-      let [res, data] = await READ_TX('bakery', 'getMyEggs', [CURADR]);
+      [res, data] = await READ_TX('bakery', 'getMyEggs', [CURADR]);
       if (!res) {
         let eggCount = data;
         if (0 < eggCount) {
-          let [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
+          [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
           if (!res) {
               let yourReward = data;
               yourReward = yourReward / BNBDIV;
@@ -284,12 +284,12 @@ let bsTooltip;
       htmlStr = '';
       for (var idx = 0; idx < 10; idx++) {
         try {
-          let [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
+          [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
             break;
           }
           let topChef = data;
-          let [res, data] = await READ_TX('bakery', '_topChefCounts', [idx]);
+          [res, data] = await READ_TX('bakery', '_topChefCounts', [idx]);
           if (res) {
             break;
           }
