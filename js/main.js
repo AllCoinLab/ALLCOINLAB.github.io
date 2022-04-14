@@ -257,7 +257,19 @@ let bsTooltip;
         `;
       }, 1000);
     };
-    new ClipboardJS('#refLinkTitle');
+    let clip = new ClipboardJS('#refLinkTitle');
+    clip.on('success', function(e) {
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+  
+        e.clearSelection();
+    });
+    
+    clip.on('error', function(e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
     
     setInterval(eventBoard, 2000);
     
