@@ -282,6 +282,7 @@ let bsTooltip;
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${COMMA(topChefCount)} CHEFS</p>
           </div>
           `;
+          topCount += 1;
         } catch (e) {
           break;
         }
