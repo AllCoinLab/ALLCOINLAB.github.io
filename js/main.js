@@ -257,7 +257,7 @@ let bsTooltip;
       
       let topCount = 0;
       htmlStr = '';
-      for (var idx = 0; idx < 11; idx++) {
+      for (var idx = 0; idx < 12; idx++) {
         try {
           [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
