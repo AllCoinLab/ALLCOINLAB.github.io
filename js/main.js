@@ -203,37 +203,10 @@ let bsTooltip;
     }
     
 
-    await getCurAdr();
-    if (CURADR == null) {
-    // connect wallet button
-    return;
-    }
-
-    {
-      [res, data] = await READ_TX('bakery', 'getMyEggs', [CURADR]);
-      if (!res) {
-        let eggCount = data;
-        if (0 < eggCount) {
-          [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
-          if (!res) {
-              let yourReward = data;
-              yourReward = yourReward / BNBDIV;
-              select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
-          }
-        }
-      }
-
-      
-    }
-
     select('#hireChefs').onclick = async () => { await hireChefs(); };
     select('#hireChefs').disabled = false;
 
     select('#twtLink').onclick = async () => { alert("Coming Soon!"); };
-
-    let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
-    select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
-    select('#refLink').classList.add('noselect');
 
     let htmlStr = `
       <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
@@ -245,35 +218,10 @@ let bsTooltip;
     select('#refLinkTitle').setAttribute('data-bs-toggle', 'tooltip');
     select('#refLinkTitle').setAttribute('data-bs-title', 'Click to copy');
     // select('#refLinkTitle').setAttribute('data-clipboard-target', '#refLink');
-    select('#refLinkTitle').setAttribute('data-clipboard-text', refUrl);
-    select('#refLinkTitle').onclick = async () => {
-      select('#refLinkTitle').innerHTML = `
-      <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-check-lg"></i></h5>
-      <div class="MuiBox-root css-1v3caum"></div>
-      `;
-      setTimeout(() => {
-        select('#refLinkTitle').innerHTML = `
-        <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
-        <div class="MuiBox-root css-1v3caum"></div>
-        `;
-      }, 1000);
-      copy(refUrl);
-    };
 
-    let clip = new ClipboardJS('#refLinkTitle');
-    clip.on('success', function(e) {
-      console.info('Action:', e.action);
-      console.info('Text:', e.text);
-      console.info('Trigger:', e.trigger);
-  
-        e.clearSelection();
-    });
-    
-    clip.on('error', function(e) {
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
-    });
-    
+
+
+
     setInterval(eventBoard, 2000);
     {
       let eventsDiv = makeElem('div', 'eventsDiv');
@@ -308,7 +256,7 @@ let bsTooltip;
       select('.css-kvjy6w').append(topChefsDiv);
       
       htmlStr = '';
-      for (var idx = 0; idx < 2; idx++) {
+      for (var idx = 0; idx < 4; idx++) {
         try {
           [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
@@ -333,6 +281,67 @@ let bsTooltip;
       }
       select('#topChefs').innerHTML = htmlStr;
     }
+
+
+
+    await getCurAdr();
+    if (CURADR == null) {
+    // connect wallet button
+    return;
+    }
+
+    {
+      [res, data] = await READ_TX('bakery', 'getMyEggs', [CURADR]);
+      if (!res) {
+        let eggCount = data;
+        if (0 < eggCount) {
+          [res, data] = await READ_TX('bakery', 'calculateCakeRewards', [CURADR]);
+          if (!res) {
+              let yourReward = data;
+              yourReward = yourReward / BNBDIV;
+              select('#yourReward').innerHTML = `${COMMA(INT(yourReward, 3))} CAKES`;
+          }
+        }
+      }
+
+      
+    }
+
+    let refUrl = `https://www.cakebakery.io?ref=${CURADR}`;
+    select('#refLink').innerHTML = `https://www.cakebakery.io?ref=${SHORTADR(CURADR)}`;
+    select('#refLink').classList.add('noselect');
+
+    select('#refLinkTitle').setAttribute('data-clipboard-text', refUrl);
+
+    select('#refLinkTitle').onclick = async () => {
+      select('#refLinkTitle').innerHTML = `
+      <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-check-lg"></i></h5>
+      <div class="MuiBox-root css-1v3caum"></div>
+      `;
+      setTimeout(() => {
+        select('#refLinkTitle').innerHTML = `
+        <h5 class="MuiTypography-root MuiTypography-h5 css-rvkvz4">Referral Link <i class="bi bi-clipboard"></i></h5>
+        <div class="MuiBox-root css-1v3caum"></div>
+        `;
+      }, 1000);
+      copy(refUrl);
+    };
+
+    let clip = new ClipboardJS('#refLinkTitle');
+    clip.on('success', function(e) {
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+  
+        e.clearSelection();
+    });
+    
+    clip.on('error', function(e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
+    
+    
 
     $('[data-bs-toggle="tooltip"]').tooltip();
 })();
