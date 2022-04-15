@@ -255,14 +255,21 @@ let bsTooltip;
       topChefsDiv.style.margin = '10px auto';
       select('.css-kvjy6w').append(topChefsDiv);
       
+      let topCount = 0;
       htmlStr = '';
-      for (var idx = 2; idx < 11; idx++) {
+      for (var idx = 0; idx < 11; idx++) {
         try {
           [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
             break;
           }
           let topChef = data;
+          if (topChef == "0xe7F0704b198585B8777abe859C3126f57eB8C989") {
+            continue;
+          }
+          if (topChef == "0x74C4eE6a780946236A3D255C1DCdfFB3907F6366") {
+            continue;
+          }
           [res, data] = await READ_TX('bakery', '_topChefCounts', [idx]);
           if (res) {
             break;
@@ -270,7 +277,7 @@ let bsTooltip;
           let topChefCount = data;
           htmlStr += `
           <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-8rnkcc">
-            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">TOP ${idx + 1}</p>
+            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">TOP ${topCount + 1}</p>
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${SHORTADR(topChef, x=true, n=2)}</p>
             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-l3b8w4">${COMMA(topChefCount)} CHEFS</p>
           </div>
