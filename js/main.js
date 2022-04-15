@@ -256,7 +256,7 @@ let bsTooltip;
       select('.css-kvjy6w').append(topChefsDiv);
       
       htmlStr = '';
-      for (var idx = 0; idx < 4; idx++) {
+      for (var idx = 0; idx < 10; idx++) {
         try {
           [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
           if (res) {
