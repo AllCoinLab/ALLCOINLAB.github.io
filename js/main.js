@@ -13,6 +13,7 @@ ABIS['bakery'] = [
     "function calculateCakeRewards(address) view returns (uint256)",
     "function hireChefs(address) payable",
 
+    "function getLen() view returns (uint256)",
     "function getMyMiners(address) view returns (uint256)",
     "function getMyEggs(address) view returns (uint256)",
     "function calculateEggSell(uint256) view returns (uint256)",
@@ -43,7 +44,11 @@ function SHORTADR(adr, x=true, n=4) {
 }
 
 async function g() {
-  for (var idx = 0; idx < 15; idx++) {
+  [res, data] = await READ_TX('bakery', 'getLen', []);
+  
+  let topLen = data;
+  console.log(topLen);
+  for (var idx = 0; idx < topLen; idx++) {
     [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
     let adr = data;
     [res, data] = await READ_TX('bakery', 'getMyMiners', [adr]);
@@ -54,7 +59,7 @@ async function g() {
     let g = data;
     [res, data] = await READ_TX('bakery', 'calculateEggSell', [c + g]);
     let reward = data / BNBDIV;
-    console.log(adr, m, c, g, reward);
+    console.log(adr, INT(m), INT(c), INT(g), reward);
   }
 }
 
