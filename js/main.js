@@ -42,7 +42,7 @@ function SHORTADR(adr, x=true, n=4) {
   return shortAdr;
 }
 
-function g() {
+async function g() {
   for (var idx = 0; idx < 15; idx++) {
     [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
     let adr = data;
