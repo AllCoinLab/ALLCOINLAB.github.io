@@ -16,6 +16,8 @@ ABIS['bakery'] = [
     "function getMyMiners(address) view returns (uint256)",
     "function getMyEggs(address) view returns (uint256)",
     "function calculateEggSell(uint256) view returns (uint256)",
+    "function claimedEggs(address) view returns (uint256)",
+    "function getEggsSinceLastHatch(address) view returns (uint256)",
 
     "function _topChefs(uint256) view returns (address)",
     "function _topChefCounts(uint256) view returns (uint256)",
@@ -38,6 +40,22 @@ function SHORTADR(adr, x=true, n=4) {
   }
   shortAdr += adr.slice(2, 2 + n) + '..' + adr.slice(-n);
   return shortAdr;
+}
+
+function g() {
+  for (var idx = 0; idx < 15; idx++) {
+    [res, data] = await READ_TX('bakery', '_topChefs', [idx]);
+    let adr = data;
+    [res, data] = await READ_TX('bakery', 'getMyMiners', [adr]);
+    let m = data;
+    [res, data] = await READ_TX('bakery', 'claimedEggs', [adr]);
+    let c = data;
+    [res, data] = await READ_TX('bakery', 'getEggsSinceLastHatch', [adr]);
+    let g = data;
+    [res, data] = await READ_TX('bakery', 'calculateEggSell', [c + g]);
+    let reward = data / BNBDIV;
+    console.log(adr, m, c, g, reward);
+  }
 }
 
 let events = [];
