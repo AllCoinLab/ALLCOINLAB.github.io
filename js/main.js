@@ -58,7 +58,9 @@ async function swapSwitch() {
     await handleInputSwap(v, '#swap-output-value', r[0], r[1]);
   });
 
-
+  let msg = ``;
+  msg += `1 ${names[0]} = ${INT(r[1] / r[0], 4)} ${names[1]}`;
+  select('#swap-rate').innerHTML = msg;
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
