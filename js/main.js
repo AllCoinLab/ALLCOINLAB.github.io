@@ -5,6 +5,9 @@ async function handleInput(e, id, func) {
   let vI = e.target.value;
   vI = vI.replace(/,/g, '.'); // some use , to .
   vI = vI.replace(/ /g, ''); // erase space
+  if (vI == '') {
+    vI = 0;
+  }
   vI = INT(vI, 10); // precision 10
   e.target.value = SPACE(vI);
   
