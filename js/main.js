@@ -33,7 +33,7 @@ async function handleInputSwap(e, id, rI, rO) {
 
 let STATES = {};
 async function swapSwitch() {
-  let names = [select(`#swap-input-value`).innerHTML, select(`#swap-output-value`).innerHTML];
+  let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
   let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
   let r = [100, 10];
 
@@ -58,8 +58,8 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
-displayText('#swap-input-value', 'wDOGE');
-displayText('#swap-output-value', 'USDC');
+displayText('#swap-input-name', 'wDOGE');
+displayText('#swap-output-name', 'USDC');
 STATES['swap'] = true;
 (async () => {
 	await swapSwitch();
