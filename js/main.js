@@ -45,13 +45,13 @@ async function swapSwitch() {
   displayText(`#swap-input-name`, names[0]);
   displayText(`#swap-output-name`, names[1]);
 
-  displayText(`#swap-input-value`, values[0]);
-  displayText(`#swap-output-value`, values[1]);
+  select(`#swap-input-value`).value = values[0];
+  select(`#swap-output-value`).value = values[1];
 
   select(`#swap-input-value`).removeEventListener('input', async (v) => {
     await handleInputSwap(v, '#swap-output-value', r[1], r[0]);
   });
-  select(`#swap-input-value`).removeEventListener('input', async (v) => {
+  select(`#swap-input-value`).addEventListener('input', async (v) => {
     await handleInputSwap(v, '#swap-output-value', r[0], r[1]);
   });
 
