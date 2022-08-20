@@ -37,21 +37,25 @@ async function swapSwitch() {
   rO = 10;
   
   let names = ['wDOGE', 'USDC'];
+  let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
   if (STATES['swap']) {
     names = [names[1], names[0]];
+    values = [values[1], values[0]];
   }
 
   displayText(`#swap-input-name`, names[0]);
   displayText(`#swap-output-name`, names[1]);
 
-
-
+  displayText(`#swap-input-value`, values[0]);
+  displayText(`#swap-output-value`, values[1]);
+  
   select(`#swap-input-value`).removeEventListener('input', async (v) => {
     await handleInputSwap(v, '#swap-output-value', rI, rO);
   });
   select(`#swap-input-value`).addEventListener('input', async (v) => {
     await handleInputSwap(v, '#swap-output-value', rO, rI);
   });
+
 
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
