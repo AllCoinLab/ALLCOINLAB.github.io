@@ -8,7 +8,7 @@ async function handleInput(e, id, func) {
   if (vI == '') {
     vI = 0;
   }
-  vI = INT(vI, 10); // precision 10
+  vI = INT(vI, 5); // precision 5
   e.target.value = SPACE(vI);
   
   let ot = select(id);
@@ -22,7 +22,7 @@ async function handleInput(e, id, func) {
   let vO = ETH(BIGINT(bvO));
   
   console.log(bvI, bvO, vO);
-  vO = INT(vO, 10);
+  vO = INT(vO, 5);
   
   ot.value = SPACE(vO);
 }
