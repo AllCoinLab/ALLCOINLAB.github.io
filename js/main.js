@@ -15,11 +15,11 @@ async function handleInput(e, id, func) {
   }
   
   let bvI = BIG(vI);
-  let bVO = await func(bvI);
-  let vO = ETH(BIGINT(bVO));
+  let bvO = await func(bvI);
+  let vO = ETH(BIGINT(bvO));
   
   vO = INT(vO, 10);
-  ot.value = vO;
+  ot.value = SPACE(vO);
 }
 
 // input output display, switch, buy
