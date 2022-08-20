@@ -33,14 +33,13 @@ async function handleInputSwap(e, id, rI, rO) {
 
 let STATES = {};
 async function swapSwitch() {
-  rI = 100;
-  rO = 10;
-  
   let names = ['wDOGE', 'USDC'];
   let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
+  let r = [100, 10];
   if (STATES['swap']) {
     names = [names[1], names[0]];
     values = [values[1], values[0]];
+    r = [r[1], r[0]];
   }
 
   displayText(`#swap-input-name`, names[0]);
@@ -48,12 +47,12 @@ async function swapSwitch() {
 
   displayText(`#swap-input-value`, values[0]);
   displayText(`#swap-output-value`, values[1]);
-  
+
   select(`#swap-input-value`).removeEventListener('input', async (v) => {
-    await handleInputSwap(v, '#swap-output-value', rI, rO);
+    await handleInputSwap(v, '#swap-output-value', r[1], r[0]);
   });
-  select(`#swap-input-value`).addEventListener('input', async (v) => {
-    await handleInputSwap(v, '#swap-output-value', rO, rI);
+  select(`#swap-input-value`).removeEventListener('input', async (v) => {
+    await handleInputSwap(v, '#swap-output-value', r[0], r[1]);
   });
 
 
