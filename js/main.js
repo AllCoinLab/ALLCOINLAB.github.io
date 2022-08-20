@@ -31,20 +31,31 @@ async function handleInputSwap(e, id, rI, rO) {
 
 
 
+let STATES = {};
 async function swapSwitch() {
   rI = 100;
   rO = 10;
   
+  let names = ['wDOGE', 'USDC'];
+  if (STATES['swap']) {
+    names = [names[1], names[0]];
+
+  }
+
+  displayText(`#swap-input-name`, names[0]);
+  displayText(`#swap-output-name`, names[1]);
+
+
+
   select(`#swap-input-value`).removeEventListener('input', async (v) => {
-    return await v.mul(rO).div(rI);
+    return await v * rO / rI;
   });
   select(`#swap-input-value`).addEventListener('input', async (v) => {
-    return await v.mul(rI).div(rO);
+    return await v * rI / rO;
   });
-
-  displayText(`#swap-input-name`, 'USDC');
-  displayText(`#swap-output-name`, 'wDOGE');
 }
 
+STATES['swap'] = true;
+await swapSwitch();
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
