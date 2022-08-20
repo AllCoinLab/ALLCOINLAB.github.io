@@ -58,6 +58,8 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
+displayText('#swap-input-value', 'wDOGE');
+displayText('#swap-output-value', 'USDC');
 STATES['swap'] = true;
 (async () => {
 	await swapSwitch();
