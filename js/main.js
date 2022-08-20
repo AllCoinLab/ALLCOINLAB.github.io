@@ -33,14 +33,13 @@ async function handleInputSwap(e, id, rI, rO) {
 
 let STATES = {};
 async function swapSwitch() {
-  let names = ['wDOGE', 'USDC'];
+  let names = [select(`#swap-input-value`).innerHTML, select(`#swap-output-value`).innerHTML];
   let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
   let r = [100, 10];
-  if (STATES['swap']) {
-    names = [names[1], names[0]];
-    values = [values[1], values[0]];
-    r = [r[1], r[0]];
-  }
+
+  names = SWAP(names);
+  values = SWAP(values);
+  r = SWAP(r);
 
   displayText(`#swap-input-name`, names[0]);
   displayText(`#swap-output-name`, names[1]);
