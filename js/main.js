@@ -61,6 +61,7 @@ async function swapSwitch() {
   let msg = ``;
   msg += `1 ${names[0]} = ${INT(r[1] / r[0], 4)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
+
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
@@ -77,6 +78,7 @@ async function swapRun() {
   msg += `from ${select(`#swap-input-value`).value} ${select(`#swap-input-name`).innerHTML}\n`;
   msg += `to ${select(`#swap-output-value`).value} ${select(`#swap-output-name`).innerHTML}\n`;
   alert(msg);
+  
   return 0;
 }
 
