@@ -64,6 +64,12 @@ STATES['swap'] = true;
 (async () => {
 	await swapSwitch();
 })();
+
+async function swapRun() {
+  return 0;
+}
+
+
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 
