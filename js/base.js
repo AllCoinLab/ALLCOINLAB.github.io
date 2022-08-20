@@ -33,9 +33,9 @@ function loadScriptDone() {
 
 const SCRIPTS = [
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
-  "https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js",
-  "https://cdn.jsdelivr.net/npm/rangeslider.js@2.3.3/dist/rangeslider.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js",
+	"https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js",
+	"https://cdn.jsdelivr.net/npm/rangeslider.js@2.3.3/dist/rangeslider.min.js",
+	"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js",
   "https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js",
   "https://cdn.jsdelivr.net/gh/upfinity-main/TheWeb3ProjectAssets/js/web3.min.js",
   "https://cdn.jsdelivr.net/gh/upfinity-main/TheWeb3ProjectAssets/js/detect-provider.min.js",
@@ -963,39 +963,6 @@ function setSpin(target, on) {
 }
 
 
-
-
-
-
-// display with space in 3nums
-async function handleInput(e, id, func) {
-  let vI = e.target.value;
-  vI = vI.replace(/,/g, '.'); // some use , to .
-  vI = vI.replace(/ /g, ''); // erase space
-  vI = INT(vI, 10); // precision 10
-  e.target.value = ADDSPACENUM(vI);
-  
-  let ot = select(id);
-  if (vI == 0) {
-    ot.value = 0;
-    return;
-  }
-  
-  let bvI = BIG(vI);
-  let bVO = await func(bvI);
-  let vO = ETH(bVO);
-  
-  vO = INT(vO, 10);
-  ot.value = vO;
-}
-
-
-// input output display, switch, buy
-async function handleInputBuy(e) {
-  await handleInput(e, 'swap-output', async (v) => {
-    return await swapRatePcs(v, (await gV('liqBnb')), (await gV('liqTwep')));
-  });
-}
 
 
 async function changeNetwork(name) {
