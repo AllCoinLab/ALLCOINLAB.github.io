@@ -70,6 +70,11 @@ STATES['swap'] = true;
 })();
 
 async function swapRun() {
+  let msg = ``;
+  msg += `swap process\n`;
+  msg += `from ${select(`#swap-input-value`).value} ${select(`#swap-input-name`).innerHTML}\n`;
+  msg += `to ${select(`#swap-output-value`).value} ${select(`#swap-output-name`).innerHTML}\n`;
+  alert(msg);
   return 0;
 }
 
