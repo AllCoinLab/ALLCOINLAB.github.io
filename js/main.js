@@ -8,8 +8,8 @@ async function handleInput(e, id, func) {
   if (vI == '') {
     vI = 0;
   }
-  vI = INT(vI, 5); // precision 5
   e.target.value = SPACE(vI);
+  vI = INT(vI, 5); // precision 5
   
   let ot = select(id);
   if (vI == 0) {
