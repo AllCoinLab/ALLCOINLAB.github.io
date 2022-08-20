@@ -28,3 +28,23 @@ async function handleInputSwap(e, id, rI, rO) {
     return await v.mul(rO).div(rI);
   });
 }
+
+
+
+async function swapSwitch() {
+  rI = 100;
+  rO = 10;
+  
+  select(`#swap-input-value`).removeEventListener('input', async (v) => {
+    return await v.mul(rO).div(rI);
+  });
+  select(`#swap-input-value`).addEventListener('input', async (v) => {
+    return await v.mul(rI).div(rO);
+  });
+
+  displayText(`#swap-input-name`, 'USDC');
+  displayText(`#swap-output-name`, 'wDOGE');
+}
+
+select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
+select(`#swap-run`).onclick = async () => { await swapRun(); };
