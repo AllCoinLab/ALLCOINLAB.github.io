@@ -39,7 +39,6 @@ async function swapSwitch() {
   let names = ['wDOGE', 'USDC'];
   if (STATES['swap']) {
     names = [names[1], names[0]];
-
   }
 
   displayText(`#swap-input-name`, names[0]);
@@ -56,6 +55,8 @@ async function swapSwitch() {
 }
 
 STATES['swap'] = true;
-await swapSwitch();
+(async () => {
+	await swapSwitch();
+})();
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
