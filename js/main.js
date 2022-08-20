@@ -52,6 +52,8 @@ async function swapSwitch() {
   select(`#swap-input-value`).addEventListener('input', async (v) => {
     return await v * rI / rO;
   });
+
+  STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
 STATES['swap'] = true;

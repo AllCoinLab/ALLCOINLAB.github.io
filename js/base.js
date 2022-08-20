@@ -119,7 +119,13 @@ function DECR(v) {
   return v - 1;
 }
 
-
+function TOGGLE(b) {
+  if (b) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 
 
