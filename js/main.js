@@ -25,7 +25,7 @@ async function handleInput(e, id, func) {
 // input output display, switch, buy
 async function handleInputSwap(e, id, rI, rO) {
   await handleInput(e, id, async (v) => {
-    return await v.mul(rO).div(rI);
+    return await v * rO / rI;
   });
 }
 
@@ -47,10 +47,10 @@ async function swapSwitch() {
 
 
   select(`#swap-input-value`).removeEventListener('input', async (v) => {
-    return await v * rO / rI;
+    await handleInputSwap(v, '#swap-output-value', rI, rO);
   });
   select(`#swap-input-value`).addEventListener('input', async (v) => {
-    return await v * rI / rO;
+    await handleInputSwap(v, '#swap-output-value', rO, rI);
   });
 
   STATES['swap'] = TOGGLE(STATES['swap']);
