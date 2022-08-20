@@ -25,7 +25,7 @@ async function handleInput(e, id, func) {
 // input output display, switch, buy
 async function handleInputSwap(e, id, rI, rO) {
   await handleInput(e, id, async (v) => {
-    return await v * rO / rI;
+    return await BIGINT(v).mul(rO).div(rI);
   });
 }
 
