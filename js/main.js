@@ -47,9 +47,8 @@ async function swapSwitch() {
   select(`#swap-input-value`).value = values[0];
   select(`#swap-output-value`).value = values[1];
 
-  select(`#swap-input-value`).removeEventListener('input', async (v) => {
-    await handleInputSwap(v, '#swap-output-value', r[1], r[0]);
-  });
+  let elm = select(`#swap-input-value`).cloneNode(true);
+  select(`#swap-input-value`).parentNode.replaceChild(elm, select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (v) => {
     await handleInputSwap(v, '#swap-output-value', r[0], r[1]);
   });
