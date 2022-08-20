@@ -285,8 +285,8 @@ for (let chainName in CHAINNAMES) {
   ];
   for (let chainName in pairAdrs) {
     for (let dex in pairAdrs[chainName]) {
-      for (let pairSet in pairAdrs[chainName][dex]) {
-        let { tokenA, tokenB, adr } = pairSet;
+      for (let pairSet of pairAdrs[chainName][dex]) {
+        let [tokenA, tokenB, adr] = pairSet;
         ADRS[`${chainName}-${dex}-${tokenA}-${tokenB}`] = adr;
         setConts(`${chainName}-${dex}-${tokenA}-${tokenB}`, ADRS[`${chainName}-${dex}-${tokenA}-${tokenB}`], ABIS['pair']);
         ADRS[`${chainName}-${dex}-${tokenB}-${tokenA}`] = adr;
