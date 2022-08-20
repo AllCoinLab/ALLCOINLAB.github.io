@@ -60,3 +60,5 @@ STATES['swap'] = true;
 })();
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
+
+console.log('main done');
