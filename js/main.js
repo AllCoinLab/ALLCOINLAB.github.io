@@ -21,7 +21,9 @@ async function handleInput(e, id, func) {
   let bvO = await func(bvI);
   let vO = ETH(BIGINT(bvO));
   
+  console.log(bvI, bvO, vO);
   vO = INT(vO, 10);
+  
   ot.value = SPACE(vO);
 }
 
