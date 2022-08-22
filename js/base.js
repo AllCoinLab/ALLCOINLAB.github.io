@@ -93,7 +93,7 @@ function SPACE(x) {
 }
 
 function l(...args) {
-  console.log(...args)
+  console.log(...args);
 }
 ////////////////////// time
 function NOW() {
