@@ -63,7 +63,11 @@
           <div class="input-element">
             <div id="swap-rate"></div>
           </div>
-          <div class="input-element"><a id="swap-run" href="#" class="w-button">swap</a></div>
+          <div class="input-element">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+              Swap
+            </button>
+          </div>
         </div>
         <div>
           <div class="input-element">
@@ -124,9 +128,7 @@
       <div class="input-element">
         <div>Contact:&nbsp;web3ever@gmail.com</div>
       </div>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
-        Launch demo modal
-      </button>
+      
 
       <!-- Modal -->
       <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -139,11 +141,11 @@
               </button>
             </div>
             <div class="modal-body">
-              ...
+              swap proceed?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" id="swap-run">Swap</button>
             </div>
           </div>
         </div>
