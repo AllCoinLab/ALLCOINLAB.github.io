@@ -74,10 +74,10 @@ async function setToken(target, adr) {
   CURTOKENS[target] = adr;
   let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
   setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
-  RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
+  r = await CONTS[`${CURCHAIN}-pair`].getReserves();
   RESERVES = {
-    'input': RESERVES[0] / 1,
-    'output': RESERVES[1] / 1,
+    'input': r[0] / 1,
+    'output': r[1] / 1,
   };
 
   for (target_ of ['input', 'output']) {
