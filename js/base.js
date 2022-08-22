@@ -241,12 +241,13 @@ for (let chainName in CHAINNAMES) {
 const DEXS = {};
 DEXS['eth'] = ['uni'];
 DEXS['bsc'] = ['pcs'];
-DEXS['dog'] = ['dog', 'yon', ];
+DEXS['dog'] = ['dog', 'yon', 'qui',];
 
 // ADRS['eth-uni-factory'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ADRS['bsc-pcs-factory'] = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
-// ADRS['dog-dog-factory'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
-// ADRS['dog-yon-factory'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
+ADRS['dog-dog-factory'] = "0xD27D9d61590874Bf9ee2a19b27E265399929C9C3";
+ADRS['dog-yon-factory'] = "0xAaA04462e35f3e40D798331657cA015169e005d7";
+ADRS['dog-qui-factory'] = "0xd2480162Aa7F02Ead7BF4C127465446150D58452";
 ABIS['factory'] = [
   "function getPair(address, address) view returns (address)",
 ];
@@ -263,8 +264,9 @@ for (let chainName in CHAINNAMES) {
 
 // ADRS['eth-uni-router'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ADRS['bsc-pcs-router'] = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
-// ADRS['dog-dog-router'] = "0xa4EE06Ce40cb7e8c04E127c1F7D3dFB7F7039C81"; // 0.2%
-// ADRS['dog-yon-router'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
+ADRS['dog-dog-router'] = "0xa4EE06Ce40cb7e8c04E127c1F7D3dFB7F7039C81"; // 0.2%
+ADRS['dog-yon-router'] = "0x72d85Ab47fBfc5E7E04a8bcfCa1601D8f8cE1a50"; // 0.5%
+ADRS['dog-qui-router'] = "0x4aE2bD0666c76C7f39311b9B3e39b53C8D7C43Ea";
 ABIS['router'] = [
   "function getAmountsOut(uint, address[]) view returns (uint[])",
   "function swapExactETHForTokensSupportingFeeOnTransferTokens(uint, address[], address, uint) payable",
