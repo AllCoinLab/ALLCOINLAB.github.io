@@ -92,6 +92,9 @@ function SPACE(x) {
     return parts.join(".");
 }
 
+function l(...args) {
+  console.log(...args)
+}
 ////////////////////// time
 function NOW() {
   return Date.now();
