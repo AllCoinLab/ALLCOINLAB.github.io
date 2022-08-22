@@ -162,7 +162,8 @@ select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
 
 select('#input-token-info').addEventListener('input', async (e) => {
-  setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
+  let adr = ADR(e.target.value);
+  setConts(`${CURCHAIN}-token`, adr, ABIS['token']);
 
   let name;
   try {
