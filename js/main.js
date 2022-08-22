@@ -102,18 +102,17 @@ DEX_NAMES = {
   }
 }
 
-CURDEX = 'dog';
+let CURDEX = 'dog';
 async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
 }
 
-async function setToken(target) {
-  CURTOKENS[target] = select('#input-token-info').value;
-  // select(`swap-${target}-name`).innerHTML = 
-}
+
+
+let CURSETTARGET = 'input';
 async function openSelectToken(target) {
-    select('#token-info-set').onclick = async () => { await setToken(target); };
+  CURSETTARGET = target;
 }
 
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
@@ -127,6 +126,9 @@ select('#input-token-info').addEventListener('input', async (e) => {
   l(name);
   let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
   displayText('#token-info', `${name} (${symbol})`);
-  select('#token-info-set').onclick = async () => { await swapTx(); };
+  select('#token-info-set').onclick = async () => { 
+    CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
+    select(`#swap-${CURSETTARGET}-name`).innerHTML = symbol;
+  };
 });
 console.log('main done');
