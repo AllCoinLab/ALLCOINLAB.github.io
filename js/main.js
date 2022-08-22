@@ -113,6 +113,8 @@ async function selectDex(name) {
 let CURSETTARGET = 'input';
 async function openSelectToken(target) {
   CURSETTARGET = target;
+  select('#input-token-info').value = '';
+  displayText('#token-info', `no address set`);
 }
 
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
