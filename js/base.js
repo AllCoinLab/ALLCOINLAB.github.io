@@ -137,8 +137,8 @@ function SWAP(v) {
 const CHAINIDS = {
 	'eth': 1,
   'bsc': 56,
-  'pol': 137,
-  'kcc': 70,
+  // 'pol': 137,
+  // 'kcc': 70,
   'dog': 2000,
 };
 const CHAINNAMES = KEYS(CHAINIDS);
@@ -235,8 +235,8 @@ ABIS['usdt'] = IERC20ABIS;
 ADRS['bsc-usdc'] = "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d";
 ADRS['dog-usdc'] = "0x765277EebeCA2e31912C9946eAe1021199B39C61";
 ABIS['usdc'] = IERC20ABIS;
-for (let chainName in CHAINNAMES) {
-  for (let name in ['weth', 'usdt', 'usdc']) {
+for (let chainName of CHAINNAMES) {
+  for (let name of ['weth', 'usdt', 'usdc']) {
     if (!(`${chainName}-${name}` in ADRS)) {
         continue;
     }  
@@ -258,9 +258,9 @@ ADRS['dog-qui-factory'] = "0xd2480162Aa7F02Ead7BF4C127465446150D58452";
 ABIS['factory'] = [
   "function getPair(address, address) view returns (address)",
 ];
-for (let chainName in CHAINNAMES) {
-  for (let dex in DEXS[chainName]) {
-    for (let name in ['factory']) {
+for (let chainName of CHAINNAMES) {
+  for (let dex of DEXS[chainName]) {
+    for (let name of ['factory']) {
       if (!(`${chainName}-${dex}-${name}` in ADRS)) {
         continue;
       }
@@ -279,9 +279,9 @@ ABIS['router'] = [
   "function swapExactETHForTokensSupportingFeeOnTransferTokens(uint, address[], address, uint) payable",
   "function swapExactTokensForETHSupportingFeeOnTransferTokens(uint, uint, address[], address, uint)",
 ];
-for (let chainName in CHAINNAMES) {
-  for (let dex in DEXS[chainName]) {
-    for (let name in ['router']) {
+for (let chainName of CHAINNAMES) {
+  for (let dex of DEXS[chainName]) {
+    for (let name of ['router']) {
       if (!(`${chainName}-${dex}-${name}` in ADRS)) {
         continue;
       }
