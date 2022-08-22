@@ -46,7 +46,7 @@ async function swapSwitch() {
   RESERVES = SWAP(RESERVES);
   CURTOKENS = {
     'input': CURTOKENS['output'], 
-    'output': CURTOKENS['input']
+    'output': CURTOKENS['input'],
   };
 
   displayText(`#swap-input-name`, names[0]);
