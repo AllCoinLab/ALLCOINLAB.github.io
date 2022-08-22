@@ -158,8 +158,16 @@ let RPCS = {
     "https://bsc-dataseed1.defibit.io",
     "https://bsc-dataseed1.ninicoin.io",
   ],
-  'dog': [
+  // https://t.me/DogeChainOfficial/50830
+  // https://docs.dogechain.dog
+  // https://explorer.dogechain.dog
+  'dog': [ 
+    "https://rpc-sg.dogechain.dog",
+    "https://rpc-us.dogechain.dog",
+    "https://rpc.dogechain.dog",
     "https://rpc01-sg.dogechain.dog",
+    "https://rpc02-sg.dogechain.dog",
+    "https://rpc03-sg.dogechain.dog",
   ],
 };
 
@@ -255,7 +263,7 @@ for (let chainName in CHAINNAMES) {
 
 // ADRS['eth-uni-router'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ADRS['bsc-pcs-router'] = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
-// ADRS['dog-dog-router'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
+// ADRS['dog-dog-router'] = "0xa4EE06Ce40cb7e8c04E127c1F7D3dFB7F7039C81"; // 0.2%
 // ADRS['dog-yon-router'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ABIS['router'] = [
   "function getAmountsOut(uint, address[]) view returns (uint[])",
