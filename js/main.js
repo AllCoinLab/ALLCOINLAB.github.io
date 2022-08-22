@@ -137,7 +137,8 @@ select('#input-token-info').addEventListener('input', async (e) => {
     CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
     select(`#swap-${CURSETTARGET}-name`).innerHTML = symbol;
 
-
+    let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
+    setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
   };
 });
 console.log('main done');
