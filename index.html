@@ -38,8 +38,8 @@
         <div class="col col-lg-6">
           <div class="input-element">
             <div class="input-name">
-              <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modal-select" id="swap-select-input">
-                <div id="swap-input-name" class="text-block">USDC</div>
+              <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modal-select" onclick="openSelectToken('input');">
+                <div id="swap-input-name" class="text-block">wDOGE</div>
                 <i class="fa-solid fa-caret-down"></i>
               </button>
             </div>
@@ -71,8 +71,8 @@
           </div>
           <div class="input-element">
             <div class="input-name">
-              <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modal-select" id="swap-select-output">
-                <div id="swap-output-name" class="text-block">wDOGE</div>
+              <button type="button" class="btn btn-light" data-toggle="modal" data-target="#modal-select" onclick="openSelectToken('output');">
+                <div id="swap-output-name" class="text-block">USDC</div>
                 <i class="fa-solid fa-caret-down"></i>
               </button>
             </div>
@@ -127,13 +127,12 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modal-select-label">Modal title</h5>
+              <h5 class="modal-title" id="modal-select-label">Select Token</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body" id="select-msg">
-              select output
               <div class="select-field">
                 <div class="form-block w-form">
                   <input type="text" class="text-field w-input" maxlength="64" placeholder="Paste token address" id="input-token-info">
@@ -141,7 +140,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="">Swap</button>
+              <button type="button" class="btn btn-primary" id="">Select</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>

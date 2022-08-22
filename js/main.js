@@ -64,8 +64,11 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
-
-let tokens = ['']
+CURCHAIN = 'dog';
+let CURTOKENS = {
+  'input': ADRS['dog-weth'],
+  'output': ADRS['dog-usdc'],
+};
 let r = [100, 10];
 displayText('#swap-input-name', 'wDOGE');
 displayText('#swap-output-name', 'USDC');
@@ -98,12 +101,27 @@ DEX_NAMES = {
     'qui': 'QuickSwap',
   }
 }
+
+CURDEX = 'dog';
 async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
+  CURDEX = name;
+}
+
+async function setToken(target) {
+  CURTOKENS[target] = select('#input-token-info').value;
+}
+async function openSelectToken(target) {
+    select('#input-token-info').onclick = async () => { await setToken(target); };
 }
 
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
+select('#input-token-info').addEventListener(async (v) => {
+  setConts(`${CURCHAIN}-token`, ADRS[`${CURCHAIN}-token`], ABIS['token']);
+
+  l(await CONTS[`${CURCHAIN}-token`].name(), await CONTS[`${CURCHAIN}-token`].symbol());
+});
 console.log('main done');
