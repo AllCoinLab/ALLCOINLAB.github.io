@@ -120,10 +120,10 @@ select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
 select('#input-token-info').addEventListener('input', async (e) => {
-  l(e);
   setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
-  displayText('#token-info', await CONTS[`${CURCHAIN}-token`].name());
-  l(await CONTS[`${CURCHAIN}-token`].name(), await CONTS[`${CURCHAIN}-token`].symbol());
+  let name = await CONTS[`${CURCHAIN}-token`].name();
+  let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
+  displayText('#token-info', `${name} (${symbol})`);
 });
 console.log('main done');
