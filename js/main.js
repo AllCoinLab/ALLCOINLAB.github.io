@@ -90,5 +90,5 @@ async function swapTx() {
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
-
+select(`#`)
 console.log('main done');
