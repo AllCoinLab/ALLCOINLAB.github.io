@@ -110,9 +110,10 @@ async function selectDex(name) {
 
 async function setToken(target) {
   CURTOKENS[target] = select('#input-token-info').value;
+  // select(`swap-${target}-name`).innerHTML = 
 }
 async function openSelectToken(target) {
-    select('#input-token-info').onclick = async () => { await setToken(target); };
+    select('#token-info-set').onclick = async () => { await setToken(target); };
 }
 
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
@@ -123,7 +124,9 @@ select('#input-token-info').addEventListener('input', async (e) => {
   setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
   let name = await CONTS[`${CURCHAIN}-token`].name();
+  l(name);
   let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
   displayText('#token-info', `${name} (${symbol})`);
+  select('#token-info-set').onclick = async () => { await swapTx(); };
 });
 console.log('main done');
