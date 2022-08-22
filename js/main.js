@@ -119,9 +119,10 @@ select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
-select('#input-token-info').addEventListener(async (v) => {
+select('#input-token-info').addEventListener('input', async (v) => {
   setConts(`${CURCHAIN}-token`, ADRS[`${CURCHAIN}-token`], ABIS['token']);
 
+  // displayText
   l(await CONTS[`${CURCHAIN}-token`].name(), await CONTS[`${CURCHAIN}-token`].symbol());
 });
 console.log('main done');
