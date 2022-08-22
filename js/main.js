@@ -122,8 +122,9 @@ select(`#swap-tx`).onclick = async () => { await swapTx(); };
 select('#input-token-info').addEventListener('input', async (e) => {
   setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
+  let name;
   try {
-    let name = await CONTS[`${CURCHAIN}-token`].name();
+    name = await CONTS[`${CURCHAIN}-token`].name();
   } catch (e) {
     displayText('#token-info', `invalid address`);
     select('#token-info-set').onclick = async () => {};
@@ -135,6 +136,8 @@ select('#input-token-info').addEventListener('input', async (e) => {
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
     select(`#swap-${CURSETTARGET}-name`).innerHTML = symbol;
+
+
   };
 });
 console.log('main done');
