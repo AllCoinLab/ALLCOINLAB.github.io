@@ -36,6 +36,12 @@ async function handleInputSwap(e, id, rI, rO) {
 
 
 
+async function setSwapRate(names) {
+  let msg = ``;
+  msg += `1 ${names[0]} = ${INT(RESERVES['output'] / RESERVES['input'], 4)} ${names[1]}`;
+  select('#swap-rate').innerHTML = msg;
+}
+
 let STATES = {};
 async function swapSwitch() {
   let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
@@ -64,9 +70,7 @@ async function swapSwitch() {
     await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
   });
 
-  let msg = ``;
-  msg += `1 ${names[0]} = ${INT(RESERVES['output'] / RESERVES['input'], 4)} ${names[1]}`;
-  select('#swap-rate').innerHTML = msg;
+  await setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
 
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
@@ -92,7 +96,7 @@ async function setToken() {
     RESERVES[target_] = RESERVES[target_] / 10**decimals;
   }
   
-  displayText('#swap-rate', `1 ${select('#swap-input-name').innerHTML} = ${RESERVES['output'] / RESERVES['input']} ${select('#swap-output-name').innerHTML}`);
+  await setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
 }
 
 let RESERVES = {
