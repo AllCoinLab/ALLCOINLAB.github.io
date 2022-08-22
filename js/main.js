@@ -93,10 +93,11 @@ let CURTOKENS = {
   'output': ADRS['dog-usdc'],
 };
 
-setToken('input', ADRS['dog-weth']);
-setToken('output', ADRS['dog-usdc']);
+
 STATES['swap'] = true;
 (async () => {
+  await setToken('input', ADRS['dog-weth']);
+  await setToken('output', ADRS['dog-usdc']);
 	await swapSwitch();
 })();
 
