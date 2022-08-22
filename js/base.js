@@ -227,6 +227,8 @@ for (let name in ABIS) {
 
 
 ////////////////////////////////////////////////////////////////////////////// busd usdt usdc
+ABIS['token'] = IERC20ABIS;
+
 ADRS['eth-weth'] = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 ADRS['bsc-weth'] = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 ADRS['dog-weth'] = "0xB7ddC6414bf4F5515b52D8BdD69973Ae205ff101";
