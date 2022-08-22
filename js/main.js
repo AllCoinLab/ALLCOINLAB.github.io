@@ -65,7 +65,8 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
-CURCHAIN = 'dog';
+let RESERVES = [0, 0];
+let CURCHAIN = 'dog';
 let CURTOKENS = {
   'input': ADRS['dog-weth'],
   'output': ADRS['dog-usdc'],
