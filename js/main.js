@@ -61,11 +61,11 @@ async function swapSwitch() {
   let elm = select(`#swap-input-value`).cloneNode(true);
   select(`#swap-input-value`).parentNode.replaceChild(elm, select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
-    await handleInputSwap(e, '#swap-output-value', RESERVES[0], RESERVES[1]);
+    await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
   });
 
   let msg = ``;
-  msg += `1 ${names[0]} = ${INT(RESERVES[1] / RESERVES[0], 4)} ${names[1]}`;
+  msg += `1 ${names[0]} = ${INT(RESERVES['output'] / RESERVES['input'], 4)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
 
   STATES['swap'] = TOGGLE(STATES['swap']);
