@@ -43,7 +43,10 @@ async function swapSwitch() {
   
   names = SWAP(names);
   values = SWAP(values);
-  RESERVES = SWAP(RESERVES);
+  RESERVES = {
+    'input': RESERVES['output'], 
+    'output': RESERVES['input'],
+  };
   CURTOKENS = {
     'input': CURTOKENS['output'], 
     'output': CURTOKENS['input'],
@@ -115,8 +118,7 @@ let CURTOKENS = {
 
 STATES['swap'] = true;
 (async () => {
-  await setToken('input', ADRS['dog-weth']);
-  await setToken('output', ADRS['dog-usdc']);
+  await setToken();
 	await swapSwitch();
 })();
 
