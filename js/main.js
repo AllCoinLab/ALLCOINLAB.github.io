@@ -123,7 +123,12 @@ select('#input-token-info').addEventListener('input', async (e) => {
   setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
   let name = await CONTS[`${CURCHAIN}-token`].name();
-  l(name);
+  if (name == '') {
+    displayText('#token-info', `invalid address`);
+    select('#token-info-set').onclick = async () => {};
+    return;
+  }
+
   let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
   displayText('#token-info', `${name} (${symbol})`);
   select('#token-info-set').onclick = async () => { 
