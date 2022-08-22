@@ -83,6 +83,7 @@ async function setToken(target, adr) {
 
   RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
   RESERVES = [RESERVES[0] / 1, RESERVES[1] / 1];
+  displayText('#swap-rate', `1 ${select('#swap-input-name')} = ${RESERVES[1] / RESERVES[0]} ${select('#swap-output-name')}`);
 }
 
 let RESERVES = [0, 0];
