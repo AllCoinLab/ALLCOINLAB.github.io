@@ -68,6 +68,23 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
+
+
+async function setToken(target, adr) {
+  CURTOKENS[target] = adr;
+
+  setConts(`${CURCHAIN}-token`, adr, ABIS['token']);
+  let name = await CONTS[`${CURCHAIN}-token`].name();
+  let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
+  select(`#swap-${target}-name`).innerHTML = symbol;
+
+  let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
+  setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
+
+  RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
+  RESERVES = [RESERVES[0] / 1, RESERVES[1] / 1];
+}
+
 let RESERVES = [0, 0];
 let CURCHAIN = 'dog';
 let CURTOKENS = {
@@ -75,8 +92,8 @@ let CURTOKENS = {
   'output': ADRS['dog-usdc'],
 };
 
-displayText('#swap-input-name', 'wDOGE');
-displayText('#swap-output-name', 'USDC');
+setToken('input', ADRS['dog-weth']);
+setToken('output', ADRS['dog-usdc']);
 STATES['swap'] = true;
 (async () => {
 	await swapSwitch();
@@ -126,6 +143,10 @@ select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
+
+
+
+
 select('#input-token-info').addEventListener('input', async (e) => {
   setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
@@ -142,14 +163,9 @@ select('#input-token-info').addEventListener('input', async (e) => {
 
   let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
   displayText('#token-info', `${name} (${symbol})`);
-  select('#token-info-set').onclick = async () => { 
-    CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
-    select(`#swap-${CURSETTARGET}-name`).innerHTML = symbol;
 
-    let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
-    setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
-    RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
-    RESERVES = [RESERVES[0] / 1, RESERVES[1] / 1];
+  select('#token-info-set').onclick = async () => { 
+    setToken(CURSETTARGET, select('#input-token-info').value)
   };
 });
 console.log('main done');
