@@ -77,13 +77,18 @@ async function swapRun() {
   msg += `swap process\n`;
   msg += `from ${select(`#swap-input-value`).value} ${select(`#swap-input-name`).innerHTML}\n`;
   msg += `to ${select(`#swap-output-value`).value} ${select(`#swap-output-name`).innerHTML}\n`;
-  alert(msg);
+  
+  displayText('#swap-msg', msg);
 
   return 0;
 }
 
+async function swapTx() {
+  alert('swap!');
+}
 
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
+select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
 console.log('main done');
