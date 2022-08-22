@@ -43,7 +43,7 @@ async function swapSwitch() {
   
   names = SWAP(names);
   values = SWAP(values);
-  r = SWAP(r);
+  RESERVES = SWAP(RESERVES);
 
   displayText(`#swap-input-name`, names[0]);
   displayText(`#swap-output-name`, names[1]);
@@ -54,11 +54,11 @@ async function swapSwitch() {
   let elm = select(`#swap-input-value`).cloneNode(true);
   select(`#swap-input-value`).parentNode.replaceChild(elm, select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
-    await handleInputSwap(e, '#swap-output-value', r[0], r[1]);
+    await handleInputSwap(e, '#swap-output-value', RESERVES[0], RESERVES[1]);
   });
 
   let msg = ``;
-  msg += `1 ${names[0]} = ${INT(r[1] / r[0], 4)} ${names[1]}`;
+  msg += `1 ${names[0]} = ${INT(RESERVES[1] / RESERVES[0], 4)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
 
   STATES['swap'] = TOGGLE(STATES['swap']);
@@ -69,7 +69,7 @@ let CURTOKENS = {
   'input': ADRS['dog-weth'],
   'output': ADRS['dog-usdc'],
 };
-let r = [100, 10];
+
 displayText('#swap-input-name', 'wDOGE');
 displayText('#swap-output-name', 'USDC');
 STATES['swap'] = true;
@@ -129,7 +129,9 @@ select('#input-token-info').addEventListener('input', async (e) => {
     name = await CONTS[`${CURCHAIN}-token`].name();
   } catch (e) {
     displayText('#token-info', `invalid address`);
-    select('#token-info-set').onclick = async () => {};
+    select('#token-info-set').onclick = async () => {
+      alert('invalid address');
+    };
     return;
   }
 
@@ -141,6 +143,8 @@ select('#input-token-info').addEventListener('input', async (e) => {
 
     let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
     setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
+    RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
+    RESERVES = [RESERVES[0] / 1, RESERVES[1] / 1];
   };
 });
 console.log('main done');
