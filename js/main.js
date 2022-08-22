@@ -53,8 +53,8 @@ async function swapSwitch() {
 
   let elm = select(`#swap-input-value`).cloneNode(true);
   select(`#swap-input-value`).parentNode.replaceChild(elm, select(`#swap-input-value`));
-  select(`#swap-input-value`).addEventListener('input', async (v) => {
-    await handleInputSwap(v, '#swap-output-value', r[0], r[1]);
+  select(`#swap-input-value`).addEventListener('input', async (e) => {
+    await handleInputSwap(e, '#swap-output-value', r[0], r[1]);
   });
 
   let msg = ``;
@@ -119,9 +119,9 @@ select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
-select('#input-token-info').addEventListener('input', async (v) => {
-  l(v);
-  setConts(`${CURCHAIN}-token`, v, ABIS['token']);
+select('#input-token-info').addEventListener('input', async (e) => {
+  l(e);
+  setConts(`${CURCHAIN}-token`, e.target.value, ABIS['token']);
 
   displayText('#token-info', await CONTS[`${CURCHAIN}-token`].name());
   l(await CONTS[`${CURCHAIN}-token`].name(), await CONTS[`${CURCHAIN}-token`].symbol());
