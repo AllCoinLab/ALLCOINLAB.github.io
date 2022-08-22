@@ -38,7 +38,7 @@ async function handleInputSwap(e, id, rI, rO) {
 
 async function setSwapRate(names) {
   let msg = ``;
-  msg += `1 ${names[0]} = ${INT(RESERVES['output'] / RESERVES['input'], 4)} ${names[1]}`;
+  msg += `1 ${names[0]} = ${INT(RESERVES['output'] / RESERVES['input'], 10)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
 }
 
