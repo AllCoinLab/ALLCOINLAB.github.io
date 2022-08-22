@@ -88,6 +88,16 @@ async function setToken(target, adr) {
 
 let RESERVES = [0, 0];
 let CURCHAIN = 'dog';
+let DEX_NAMES = {
+  'dog': {
+    'max': 'MaxSwap',
+    'dog': 'DogeSwap',
+    'yod': 'yodeSwap',
+    'qui': 'QuickSwap',
+  }
+}
+let CURDEX = 'yod';
+
 let CURTOKENS = {
   'input': ADRS['dog-weth'],
   'output': ADRS['dog-usdc'],
@@ -117,16 +127,7 @@ async function swapTx() {
 }
 
 
-DEX_NAMES = {
-  'dog': {
-    'max': 'MaxSwap',
-    'dog': 'DogeSwap',
-    'yod': 'yodeSwap',
-    'qui': 'QuickSwap',
-  }
-}
 
-let CURDEX = 'yod';
 async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
