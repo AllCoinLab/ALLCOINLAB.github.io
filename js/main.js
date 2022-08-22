@@ -70,11 +70,10 @@ async function swapSwitch() {
 
 
 
-async function setToken(target, adr) {
-  CURTOKENS[target] = adr;
+async function setToken() {
   let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
   setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
-  r = await CONTS[`${CURCHAIN}-pair`].getReserves();
+  let r = await CONTS[`${CURCHAIN}-pair`].getReserves();
   RESERVES = {
     'input': r[0] / 1,
     'output': r[1] / 1,
@@ -178,7 +177,8 @@ select('#input-token-info').addEventListener('input', async (e) => {
   displayText('#token-info', `${name} (${symbol})`);
 
   select('#token-info-set').onclick = async () => { 
-    setToken(CURSETTARGET, select('#input-token-info').value)
+    CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
+    setToken();
   };
 });
 console.log('main done');
