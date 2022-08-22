@@ -87,6 +87,19 @@ async function swapTx() {
   alert('swap!');
 }
 
+
+DEX_NAMES = {
+  'dog': {
+    'max': 'MaxSwap',
+    'dog': 'DogeSwap',
+    'yod': 'yodeSwap',
+    'qui': 'QuickSwap',
+  }
+}
+async function selectDex(name) {
+  displayText('#dex-type', DEX_NAMES['dog'][name]);
+}
+
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
