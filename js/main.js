@@ -64,6 +64,8 @@ async function swapSwitch() {
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
 
+
+let tokens = ['']
 let r = [100, 10];
 displayText('#swap-input-name', 'wDOGE');
 displayText('#swap-output-name', 'USDC');
