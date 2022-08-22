@@ -162,7 +162,16 @@ select(`#swap-tx`).onclick = async () => { await swapTx(); };
 
 
 select('#input-token-info').addEventListener('input', async (e) => {
-  let adr = ADR(e.target.value);
+  let adr;
+  try {
+    adr = ADR(e.target.value);
+  } catch (e) {
+    displayText('#token-info', `invalid address`);
+    select('#token-info-set').onclick = async () => {
+      alert('invalid address');
+    };
+    return;
+  }
   setConts(`${CURCHAIN}-token`, adr, ABIS['token']);
 
   let name;
