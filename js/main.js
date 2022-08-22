@@ -126,7 +126,7 @@ DEX_NAMES = {
   }
 }
 
-let CURDEX = 'dog';
+let CURDEX = 'yod';
 async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
