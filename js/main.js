@@ -72,21 +72,31 @@ async function swapSwitch() {
 
 async function setToken(target, adr) {
   CURTOKENS[target] = adr;
-
-  setConts(`${CURCHAIN}-token`, adr, ABIS['token']);
-  let name = await CONTS[`${CURCHAIN}-token`].name();
-  let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
-  select(`#swap-${target}-name`).innerHTML = symbol;
-
   let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
   setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
-
   RESERVES = await CONTS[`${CURCHAIN}-pair`].getReserves();
-  RESERVES = [RESERVES[0] / 1, RESERVES[1] / 1];
-  displayText('#swap-rate', `1 ${select('#swap-input-name').innerHTML} = ${RESERVES[1] / RESERVES[0]} ${select('#swap-output-name').innerHTML}`);
+  RESERVES = {
+    'input': RESERVES[0] / 1,
+    'output': RESERVES[1] / 1,
+  };
+
+  for (target_ of ['input', 'output']) {
+    setConts(`${CURCHAIN}-${target_}-token`, CURTOKENS[target_], ABIS['token']);
+    let name = await CONTS[`${CURCHAIN}-${target_}-token`].name();
+    let symbol = await CONTS[`${CURCHAIN}-${target_}-token`].symbol();
+    let decimals = await CONTS[`${CURCHAIN}-${target_}-token`].decimals();
+    select(`#swap-${target_}-name`).innerHTML = symbol;
+
+    RESERVES[target_] = RESERVES[target_] / 10**decimals;
+  }
+  
+  displayText('#swap-rate', `1 ${select('#swap-input-name').innerHTML} = ${RESERVES['output'] / RESERVES['input']} ${select('#swap-output-name').innerHTML}`);
 }
 
-let RESERVES = [0, 0];
+let RESERVES = {
+  'input': 1,
+  'output': 1,
+};
 let CURCHAIN = 'dog';
 let DEX_NAMES = {
   'dog': {
