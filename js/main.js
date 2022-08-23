@@ -141,7 +141,7 @@ async function swapTx() {
   let aI = select(`#swap-input-value`).value.replace(/ /g, '');
   aI = INT(FLOAT(aI) * 10**6);
   let aO = select(`#swap-output-value`).value.replace(/ /g, '');
-  aO = INT(FLOAT(aI) * 10**6);
+  aO = INT(FLOAT(aO) * 10**6);
   let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
   await SEND_TX('dog-max-router', 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
