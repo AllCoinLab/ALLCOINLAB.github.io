@@ -586,6 +586,7 @@ async function ERR(err, popup=true) {
     }
   }
 
+  alert('E:' + err);
   return result;
 }
 
