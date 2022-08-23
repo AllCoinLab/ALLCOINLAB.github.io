@@ -1,4 +1,4 @@
-
+'use strict'
 
 // display with space in 3nums
 async function handleInput(e, id, func) {
