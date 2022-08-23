@@ -112,11 +112,11 @@ let DEX_NAMES = {
     'qui': 'QuickSwap',
   }
 }
-let CURDEX = 'yod';
+let CURDEX = 'max';
 
 let CURTOKENS = {
-  'input': ADRS['dog-weth'],
-  'output': ADRS['dog-usdc'],
+  'input': ADRS['dog-usdc'],
+  'output': ADRS['dog-usdt'],
 };
 
 
