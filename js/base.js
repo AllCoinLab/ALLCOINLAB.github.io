@@ -558,7 +558,7 @@ async function ERR(err, popup=true) {
     return result;
   }
 
-  if (err['code'] == -32603) {
+  if (err['code'] == -32603) { // json-rpc err
     if (!('data' in err)) {
       alert('no data:' + err);
       return result;
@@ -584,9 +584,14 @@ async function ERR(err, popup=true) {
       alert('D:' + result);
       return result;
     }
+
+    let msg = data['message'];
+    result = msg;
+    alert('E:' + result);
+    return result;
   }
 
-  alert('E:' + err);
+  alert('F:' + err);
   return result;
 }
 
