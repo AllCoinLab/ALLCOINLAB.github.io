@@ -157,6 +157,7 @@ async function openSelectToken(target) {
   displayText('#token-info', `no address set`);
 }
 
+select('#conn').onclick = async () => { await conn(); };
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
