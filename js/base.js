@@ -591,7 +591,7 @@ async function ERR(err, popup=true) {
     return result;
   }
 
-  alert('F:' + err);
+  alert('F:' + err['message']);
   return result;
 }
 
