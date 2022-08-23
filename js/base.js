@@ -285,6 +285,7 @@ ABIS['router'] = [
   "function getAmountsOut(uint, address[]) view returns (uint[])",
   "function swapExactETHForTokensSupportingFeeOnTransferTokens(uint, address[], address, uint) payable",
   "function swapExactTokensForETHSupportingFeeOnTransferTokens(uint, uint, address[], address, uint)",
+  "function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint, uint, address[], address, uint)",
 ];
 for (let chainName of CHAINNAMES) {
   for (let dex of DEXS[chainName]) {
