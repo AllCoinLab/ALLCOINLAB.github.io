@@ -168,8 +168,7 @@ select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
 select(`#swap-approve`).onclick = async () => { 
   setConts(`${CURCHAIN}-token`, CURTOKENS['input'], ABIS['token']);
-  // await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS['dog-max-router'], UINT256MAX]);
-  alert('soon');
+  await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS['dog-max-router'], UINT256MAX]);
 };
 
 
