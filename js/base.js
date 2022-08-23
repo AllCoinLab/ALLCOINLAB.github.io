@@ -253,7 +253,7 @@ for (let chainName of CHAINNAMES) {
 const DEXS = {};
 DEXS['eth'] = ['uni'];
 DEXS['bsc'] = ['pcs'];
-DEXS['dog'] = ['dog', 'yod', 'qui',];
+DEXS['dog'] = ['max', 'dog', 'yod', 'qui',];
 
 // ADRS['eth-uni-factory'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ADRS['bsc-pcs-factory'] = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
