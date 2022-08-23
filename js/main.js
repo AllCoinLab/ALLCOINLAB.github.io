@@ -129,8 +129,8 @@ STATES['swap'] = true;
 async function swapRun() {
   let msg = ``;
   msg += `swap process\n`;
-  msg += `from ${select(`#swap-input-value`).value} ${select(`#swap-input-name`).innerHTML}\n`;
-  msg += `to ${select(`#swap-output-value`).value} ${select(`#swap-output-name`).innerHTML}\n`;
+  msg += `from ${select(`#swap-input-value`).value.replace(/ /g, '')} ${select(`#swap-input-name`).innerHTML}\n`;
+  msg += `to ${select(`#swap-output-value`).value.replace(/ /g, '')} ${select(`#swap-output-name`).innerHTML}\n`;
   
   displayText('#swap-msg', msg);
 
@@ -138,7 +138,12 @@ async function swapRun() {
 }
 
 async function swapTx() {
-  alert('swap!');
+  let aI = select(`#swap-input-value`).value.replace(/ /g, '');
+  aI = INT(FLOAT(aI) * 10**6);
+  let aO = select(`#swap-output-value`).value.replace(/ /g, '');
+  aO = INT(FLOAT(aI) * 10**6);
+  let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
+  await SEND_TX('dog-max-router', 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
 }
 
 
@@ -200,4 +205,14 @@ select('#input-token-info').addEventListener('input', async (e) => {
     setToken();
   };
 });
+
+(async () => {
+  await getCurAdr();
+  if (CURADR == null) {
+    // connect wallet button
+    return;
+  }
+})();
+
+
 console.log('main done');
