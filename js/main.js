@@ -86,7 +86,7 @@ async function setToken() {
     'output': r[1] / 1,
   };
 
-  for (target_ of ['input', 'output']) {
+  for (let target_ of ['input', 'output']) {
     setConts(`${CURCHAIN}-${target_}-token`, CURTOKENS[target_], ABIS['token']);
     let name = await CONTS[`${CURCHAIN}-${target_}-token`].name();
     let symbol = await CONTS[`${CURCHAIN}-${target_}-token`].symbol();
