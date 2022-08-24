@@ -92,9 +92,9 @@ async function setToken() {
     let name = await CONTS[`${CURCHAIN}-${target}`].name();
     let symbol = await CONTS[`${CURCHAIN}-${target}`].symbol();
     let decimals = await CONTS[`${CURCHAIN}-${target}`].decimals();
-    select(`#swap-${target_}-name`).innerHTML = symbol;
+    select(`#swap-${target}-name`).innerHTML = symbol;
 
-    RESERVES[target_] = RESERVES[target_] / 10**decimals;
+    RESERVES[target] = RESERVES[target] / 10**decimals;
   }
   
   await setSwapRate();
