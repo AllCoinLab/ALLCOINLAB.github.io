@@ -53,9 +53,9 @@ async function clearEvent(elm) {
 let STATES = {};
 async function swapSwitch() {
   let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
-  [select(`#swap-output-name`).innerHTML, select(`#swap-input-name`).innerHTML] = SWAP(names);
+  [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML] = SWAP(names);
   let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
-  [select(`#swap-output-value`).value, select(`#swap-input-value`).value] = SWAP(values);
+  [select(`#swap-input-value`).value, select(`#swap-output-value`).value] = SWAP(values);
 
   RESERVES = {
     'input': RESERVES['output'], 
