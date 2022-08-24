@@ -279,9 +279,12 @@ async function checkAllowance(adr) {
 
 async function runPersonal() {
   let allowance = await checkAllowance(CURTOKENS['input']);
-  if (!allowance) {
+  if (allowance) {
+    select('#swap-approve').classList.add('btn-primary');
+    select('#swap-approve').innerHTML = 'Approve';
+  } else {
     select('#swap-approve').classList.remove('btn-primary');
-    select('#swap-approve').innerHTML = 'approved';
+    select('#swap-approve').innerHTML = 'Approved';
   }
 }
 
