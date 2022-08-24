@@ -100,7 +100,7 @@ async function setToken() {
     return [true, data];
   }
   let pair = data[0];
-  
+
   let r = await getR(pair);
   RESERVES = {
     'input': r[0],
@@ -120,6 +120,8 @@ async function setToken() {
   await setFuncs();
 
   await setSwapRate();
+
+  select('#dexscreen').src += '';
 }
 
 let RESERVES = {
