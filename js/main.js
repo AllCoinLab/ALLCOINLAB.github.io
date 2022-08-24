@@ -99,6 +99,7 @@ async function setToken() {
   if (res) {
     return [true, data];
   }
+  let pair = data[0];
   
   let r = await getR(pair);
   RESERVES = {
