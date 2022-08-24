@@ -128,10 +128,12 @@ STATES['swap'] = true;
 })();
 
 async function swapRun() {
+  let aI = select(`#swap-input-value`).value.replace(/ /g, '');
+  let aO = select(`#swap-output-value`).value.replace(/ /g, '');
   let msg = ``;
   msg += `swap process\n`;
-  msg += `from ${select(`#swap-input-value`).value.replace(/ /g, '')} ${select(`#swap-input-name`).innerHTML}\n`;
-  msg += `to ${select(`#swap-output-value`).value.replace(/ /g, '')} ${select(`#swap-output-name`).innerHTML}\n`;
+  msg += `from ${aI} ${select(`#swap-input-name`).innerHTML}\n`;
+  msg += `to ${aO} ${select(`#swap-output-name`).innerHTML}\n`;
   
   displayText('#swap-msg', msg);
 
@@ -140,9 +142,15 @@ async function swapRun() {
 
 async function swapTx() {
   let aI = select(`#swap-input-value`).value.replace(/ /g, '');
-  aI = INT(FLOAT(aI) * 10**6);
+  {
+    let decimals = await CONTS[`${CURCHAIN}-input`].decimals();
+    aI = INT(FLOAT(aI) * 10**decimals);
+  }
   let aO = select(`#swap-output-value`).value.replace(/ /g, '');
-  aO = INT(FLOAT(aO) * 10**6);
+  {
+    let decimals = await CONTS[`${CURCHAIN}-output`].decimals();
+    aO = INT(FLOAT(aO) * 10**decimals);
+  }
   let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
   await SEND_TX('dog-max-router', 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
