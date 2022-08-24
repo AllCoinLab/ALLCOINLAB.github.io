@@ -185,7 +185,7 @@ async function swapTx() {
     return;
   }
   
-  let args = [ADRS[`dog-${CURDEX}-factory`], aI, BIGINT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
+  let args = [ADRS[`dog-${CURDEX}-factory`], aI, BIGINT(aO * 97n / 100n), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
   await SEND_TX(`dog-max-route`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
 }
