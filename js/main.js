@@ -39,7 +39,7 @@ async function clearEvent(elm) {
 
 async function setFuncs() {
   await checkApprove();
-  
+
   await setSwapRate([RESERVES['input'], RESERVES['output']]);
 
   clearEvent(select(`#swap-input-value`));
@@ -197,8 +197,6 @@ async function selectDex(name) {
   CURDEX = name;
 
   await setPair();
-
-  await checkApprove();
 }
 
 
@@ -257,10 +255,6 @@ select('#input-token-info').addEventListener('input', async (e) => {
     CURTOKENS[CURSETTARGET] = adr;
 
     await setPair();
-
-    if (CURSETTARGET == 'input') {
-      await checkApprove();
-    }
   };
 });
 
