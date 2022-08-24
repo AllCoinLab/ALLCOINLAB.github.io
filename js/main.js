@@ -98,7 +98,7 @@ async function getR(pair) {
 }
 
 // pair based, token based
-async function setToken() {
+async function setPair() {
   let [res, data] = await getPair(CURTOKENS['input'], CURTOKENS['output']);
   if (res) {
     displayText('#swap-rate', 'no pair');
@@ -111,6 +111,8 @@ async function setToken() {
     'input': r[0],
     'output': r[1],
   };
+
+  select('#dexscreen').src = `https://dexscreener.com/dogechain/${pair}?embed=1&amp;theme=dark&amp;info=0`;
 
   for (let target of ['input', 'output']) {
     setConts(`${CURCHAIN}-${target}`, CURTOKENS[target], ABIS['token']);
@@ -125,8 +127,6 @@ async function setToken() {
   await setFuncs();
 
   await setSwapRate();
-
-  select('#dexscreen').src = `https://dexscreener.com/dogechain/${pair}?embed=1&amp;theme=dark&amp;info=0`;
 }
 
 let RESERVES = {
@@ -190,7 +190,7 @@ async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
 
-  await setToken();
+  await setPair();
 
   await checkApprove();
 
@@ -251,7 +251,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
 
-    await setToken();
+    await setPair();
 
     if (CURSETTARGET == 'input') {
       await checkApprove();
@@ -301,7 +301,7 @@ async function checkApprove() {
 }
 
 async function runGlobal() {
-  await setToken();
+  await setPair();
   
   select('#conn').onclick = async () => { await conn(); };
   select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
