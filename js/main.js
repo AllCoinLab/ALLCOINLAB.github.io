@@ -151,8 +151,8 @@ let DEX_NAMES = {
 let CURDEX = 'max';
 
 let CURTOKENS = {
-  'input': ADRS['dog-usdc'],
-  'output': ADRS['dog-usdt'],
+  'input': ADRS['dog-usdt'],
+  'output': ADRS['dog-usdc'],
 };
 
 async function swapRun() {
