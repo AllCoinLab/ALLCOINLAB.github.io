@@ -278,6 +278,9 @@ async function checkAllowance(adr) {
 }
 
 async function runPersonal() {
+  select('#conn').classList.remove('btn-primary');
+  select('#conn').innerHTML = SHORTADR(CURADR);
+
   let allowance = await checkAllowance(CURTOKENS['input']);
   if (allowance) {
     select('#swap-approve').classList.add('btn-primary');
@@ -292,6 +295,9 @@ async function runPersonal() {
   await getCurAdr();
   if (CURADR == null) {
     // connect wallet button
+    select('#conn').classList.add('btn-primary');
+    select('#conn').innerHTML = "Connect Wallet";
+
     return;
   }
 
