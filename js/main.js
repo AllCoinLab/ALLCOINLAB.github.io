@@ -141,8 +141,9 @@ let DEX_NAMES = {
   'dog': {
     'max': 'MaxSwap',
     'dog': 'DogeSwap',
-    'yod': 'yodeSwap',
+    'yod': 'YodeSwap',
     'qui': 'QuickSwap',
+    'kib': 'KibbleSwap',
   }
 }
 let CURDEX = 'max';
