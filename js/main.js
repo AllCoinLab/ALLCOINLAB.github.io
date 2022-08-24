@@ -317,11 +317,20 @@ async function runGlobal() {
   };
 }
 
+let BALS = {};
 async function runPersonal() {
   clickable('#conn', false);
   select('#conn').innerHTML = SHORTADR(CURADR);
 
   await checkApprove();
+
+  for (let target of ['input', 'output']) {
+    let bal = await CONTS[`${CURCHAIN}-${target}`].balanceOf(CURADR);
+    let decimals = await CONTS[`${CURCHAIN}-${target}`].decimals();
+    BALS[target] = bal / 10**decimals;
+
+    displayText(target, ROUND(BALS[target], 3));
+  }
 }
 
 (async () => {
