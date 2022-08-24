@@ -36,10 +36,13 @@ async function handleInputSwap(e, id, rI, rO) {
 
 
 
-async function setSwapRate(names) {
+async function _setSwapRate(names) {
   let msg = ``;
   msg += `1 ${names[0]} = ${ROUND(RESERVES['output'] / RESERVES['input'], 10)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
+}
+async function setSwapRate() {
+  _setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
 }
 
 async function clearEvent(elm) {
@@ -68,7 +71,7 @@ async function swapSwitch() {
     await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
   });
 
-  await setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
+  await setSwapRate();
 
   STATES['swap'] = TOGGLE(STATES['swap']);
 }
@@ -94,7 +97,7 @@ async function setToken() {
     RESERVES[target_] = RESERVES[target_] / 10**decimals;
   }
   
-  await setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
+  await setSwapRate();
 }
 
 let RESERVES = {
