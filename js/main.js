@@ -55,8 +55,6 @@ async function setFuncs() {
   select(`#swap-input-value`).addEventListener('input', async (e) => {
     await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
   });
-
-  await setSwapRate();
 }
 
 let STATES = {};
@@ -107,7 +105,7 @@ async function setToken() {
     'input': r[0],
     'output': r[1],
   };
-  
+
   for (let target of ['input', 'output']) {
     setConts(`${CURCHAIN}-${target}`, CURTOKENS[target], ABIS['token']);
     // let name = await CONTS[`${CURCHAIN}-${target}`].name();
@@ -119,6 +117,8 @@ async function setToken() {
   }
   
   await setFuncs();
+
+  await setSwapRate();
 }
 
 let RESERVES = {
