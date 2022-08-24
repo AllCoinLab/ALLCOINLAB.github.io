@@ -107,11 +107,14 @@ async function getReserves() {
 }
 
 async function setToken() {
-  await getReserves();
+  let [res, data] = await getReserves();
+  if (res) {
+    return [true, data];
+  }
 
   for (let target of ['input', 'output']) {
     setConts(`${CURCHAIN}-${target}`, CURTOKENS[target], ABIS['token']);
-    let name = await CONTS[`${CURCHAIN}-${target}`].name();
+    // let name = await CONTS[`${CURCHAIN}-${target}`].name();
     let symbol = await CONTS[`${CURCHAIN}-${target}`].symbol();
     let decimals = await CONTS[`${CURCHAIN}-${target}`].decimals();
     select(`#swap-${target}-name`).innerHTML = symbol;
