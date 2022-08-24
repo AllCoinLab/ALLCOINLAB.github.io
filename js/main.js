@@ -283,18 +283,28 @@ async function checkAllowance(adr) {
   return true;
 }
 
+async function clickable(id, b) {
+  if (b) {
+    select(id).classList.remove('pe-none');
+    select(id).classList.add('btn-primary');
+  } else {
+    select(id).classList.add('pe-none');
+    select(id).classList.remove('btn-primary')
+  }
+}
 async function needApprove() {
   let allowance = await checkAllowance(CURTOKENS['input']);
   if (allowance) {
-    select('#swap-approve').classList.add('btn-primary');
+    clickable('#swap-approve', true);
     select('#swap-approve').innerHTML = 'Approve';
   } else {
-    select('#swap-approve').classList.remove('btn-primary');
+    clickable('#swap-approve', false);
     select('#swap-approve').innerHTML = 'Approved';
+    
   }
 }
 async function runPersonal() {
-  select('#conn').classList.remove('btn-primary');
+  clickable('#conn', false);
   select('#conn').innerHTML = SHORTADR(CURADR);
 
   await needApprove();
@@ -304,7 +314,7 @@ async function runPersonal() {
   await getCurAdr();
   if (CURADR == null) {
     // connect wallet button
-    select('#conn').classList.add('btn-primary');
+    clickable('#conn', true);
     select('#conn').innerHTML = "Connect Wallet";
 
     return;
