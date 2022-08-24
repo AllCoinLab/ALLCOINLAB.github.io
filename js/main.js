@@ -42,13 +42,18 @@ async function setSwapRate(names) {
   select('#swap-rate').innerHTML = msg;
 }
 
+async function clearEvent(elm) {
+  let elm_ = elm.cloneNode(true);
+  elm.parentNode.replaceChild(elm_, elm);
+}
+
 let STATES = {};
 async function swapSwitch() {
   let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
+  [select(`#swap-output-name`).innerHTML, select(`#swap-input-name`).innerHTML] = SWAP(names);
   let values = [select(`#swap-input-value`).value, select(`#swap-output-value`).value];
-  
-  names = SWAP(names);
-  values = SWAP(values);
+  [select(`#swap-output-value`).value, select(`#swap-input-value`).value] = SWAP(values);
+
   RESERVES = {
     'input': RESERVES['output'], 
     'output': RESERVES['input'],
@@ -58,14 +63,7 @@ async function swapSwitch() {
     'output': CURTOKENS['input'],
   };
 
-  displayText(`#swap-input-name`, names[0]);
-  displayText(`#swap-output-name`, names[1]);
-
-  select(`#swap-input-value`).value = values[0];
-  select(`#swap-output-value`).value = values[1];
-
-  let elm = select(`#swap-input-value`).cloneNode(true);
-  select(`#swap-input-value`).parentNode.replaceChild(elm, select(`#swap-input-value`));
+  clearEvent(select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
     await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
   });
