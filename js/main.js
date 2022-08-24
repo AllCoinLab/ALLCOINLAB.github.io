@@ -55,6 +55,8 @@ async function setFuncs() {
       let amounts = await CONTS[`${CURCHAIN}-${CURDEX}-router`].getAmountsOut(...args);
       return amounts[1] / 10**(await CONTS[`${CURCHAIN}-input`].decimals());
     });
+
+    select('#swap-rate').innerHTML = msg;
   });
 }
 
@@ -275,12 +277,10 @@ select('#input-token-info').addEventListener('input', async (e) => {
 
 async function checkAllowance(adr) {
   if (!CURADR) {
-    alert('wallet connect first');
     return true;
   }
 
   setConts(`${CURCHAIN}-temp`, adr, ABIS['token']);
-  
   let allowance = await CONTS[`${CURCHAIN}-temp`].allowance(CURADR, ADRS[`dog-max-route`]);
   if (0 < allowance) {
     return false;
