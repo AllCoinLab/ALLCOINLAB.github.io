@@ -25,7 +25,7 @@ async function handleInput(e, id, func) {
 
 async function _setSwapRate(names, vs) {
   let msg = ``;
-  msg += `1 ${names[0]} = ${ROUND(vs[1] / vs[0], 10)} ${names[1]}`;
+  msg += `1 ${names[0]} = ${ROUND(vs[1] / vs[0], 5)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
 }
 async function setSwapRate(vs) {
