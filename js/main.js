@@ -79,8 +79,8 @@ async function swapSwitch() {
 }
 
 
-async function checkReserves() {
-  let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(CURTOKENS['input'], CURTOKENS['output']);
+async function checkReserves(tI, tO) {
+  let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(tI, tO);
   if (pair == "0x0000000000000000000000000000000000000000") {
     return [true, [pair]];
   }
@@ -90,7 +90,7 @@ async function checkReserves() {
 }
 
 async function getReserves() {
-  let [res, data] = await checkReserves();
+  let [res, data] = await checkReserves(CURTOKENS['input'], CURTOKENS['output']);
   if (res) {
     return [true, data];
   }
@@ -235,7 +235,13 @@ select('#input-token-info').addEventListener('input', async (e) => {
   displayText('#token-info', `${name} (${symbol})`);
 
   {
-    let [res, data] = await checkReserves();
+    let adrs;
+    if (CURSETTARGET == 'input') {
+      adrs = [adr, CURTOKENS['output']];
+    } else {
+      adrs = [CURTOKENS['input'], adr];
+    }
+    let [res, data] = await checkReserves(adrs[0], adrs[1]);
     if (res) {
       displayText('#token-info', `${name} (${symbol}) [NO PAIR]`);
       select('#token-info-set').onclick = async () => {
@@ -246,7 +252,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
   }
 
   select('#token-info-set').onclick = async () => { 
-    CURTOKENS[CURSETTARGET] = select('#input-token-info').value;
+    CURTOKENS[CURSETTARGET] = adr;
     let [res, data] = await getReserves();
     setToken();
   };
