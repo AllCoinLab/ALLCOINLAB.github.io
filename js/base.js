@@ -208,7 +208,7 @@ const IERC20ABIS = [
   "function transfer(address, uint) returns (bool)",
   
   "event Transfer(address indexed from, address indexed to, uint amount)",
-  "event Approval(address indexed owner, address indexed spender, uint value);",
+  "event Approval(address indexed owner, address indexed spender, uint value)",
 ];
 
 
@@ -233,6 +233,10 @@ ADRS['eth-weth'] = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 ADRS['bsc-weth'] = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 ADRS['dog-weth'] = "0xB7ddC6414bf4F5515b52D8BdD69973Ae205ff101";
 ABIS['weth'] = IERC20ABIS;
+ABIS['weth'] += [
+  "function deposit()",
+  "function withdraw(uint)",
+];
 // ADRS['eth-weth'] = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 ADRS['bsc-usdt'] = "0x55d398326f99059fF775485246999027B3197955";
 ADRS['dog-usdt'] = "0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D";
