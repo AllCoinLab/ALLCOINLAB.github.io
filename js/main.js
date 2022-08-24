@@ -176,6 +176,12 @@ async function swapTx() {
     let decimals = await CONTS[`${CURCHAIN}-output`].decimals();
     aO = INT(FLOAT(aO) * 10**decimals);
   }
+
+  if (!CURADR) {
+    alert('connect wallet');
+    return;
+  }
+  
   let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
   await SEND_TX(`dog-max-router`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
