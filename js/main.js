@@ -79,8 +79,6 @@ async function swapSwitch() {
 
   await setFuncs();
 
-  await setSwapRate();
-
   await checkApprove();
 }
 
@@ -132,8 +130,6 @@ async function setPair() {
   }
   
   await setFuncs();
-
-  await setSwapRate();
 }
 
 let RESERVES = {
