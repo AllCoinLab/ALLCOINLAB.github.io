@@ -50,6 +50,15 @@ async function clearEvent(elm) {
   elm.parentNode.replaceChild(elm_, elm);
 }
 
+async function setFuncs() {
+  clearEvent(select(`#swap-input-value`));
+  select(`#swap-input-value`).addEventListener('input', async (e) => {
+    await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
+  });
+
+  await setSwapRate();
+}
+
 let STATES = {};
 async function swapSwitch() {
   let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
@@ -66,14 +75,7 @@ async function swapSwitch() {
     'output': CURTOKENS['input'],
   };
 
-  clearEvent(select(`#swap-input-value`));
-  select(`#swap-input-value`).addEventListener('input', async (e) => {
-    await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
-  });
-
-  await setSwapRate();
-
-  STATES['swap'] = TOGGLE(STATES['swap']);
+  await setFuncs();
 }
 
 
