@@ -290,10 +290,13 @@ async function checkApprove() {
   if (allowance) {
     clickable('#swap-approve', true);
     select('#swap-approve').innerHTML = 'Approve';
+    clickable('#swap-run', false);
+    displayText('#swap-run', 'Approve First');
   } else {
     clickable('#swap-approve', false);
     select('#swap-approve').innerHTML = 'Approved';
-    
+    clickable('#swap-run', true);
+    displayText('#swap-run', 'Swap');
   }
 }
 
