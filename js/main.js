@@ -169,12 +169,12 @@ async function swapTx() {
   let aI = select(`#swap-input-value`).value.replace(/ /g, '');
   {
     let decimals = await CONTS[`${CURCHAIN}-input`].decimals();
-    aI = INT(FLOAT(aI) * 10**decimals);
+    aI = BIGINT(FLOAT(aI) * 10**decimals);
   }
   let aO = select(`#swap-output-value`).value.replace(/ /g, '');
   {
     let decimals = await CONTS[`${CURCHAIN}-output`].decimals();
-    aO = INT(FLOAT(aO) * 10**decimals);
+    aO = BIGINT(FLOAT(aO) * 10**decimals);
   }
 
   if (!CURADR) {
@@ -182,7 +182,7 @@ async function swapTx() {
     return;
   }
   
-  let args = [ADRS[`dog-${CURDEX}-factory`], aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
+  let args = [ADRS[`dog-${CURDEX}-factory`], aI, BIGINT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
   await SEND_TX(`dog-max-route`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
 }
