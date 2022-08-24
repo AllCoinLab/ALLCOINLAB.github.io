@@ -38,8 +38,10 @@ async function clearEvent(elm) {
 }
 
 async function setFuncs() {
-  await setSwapRate([RESERVES['input'], RESERVES['output']]);
+  await checkApprove();
   
+  await setSwapRate([RESERVES['input'], RESERVES['output']]);
+
   clearEvent(select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
     await handleInput(e, '#swap-output-value', async (vI) => {
@@ -80,8 +82,6 @@ async function swapSwitch() {
   }
 
   await setFuncs();
-
-  await checkApprove();
 }
 
 
