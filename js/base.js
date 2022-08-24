@@ -234,7 +234,7 @@ ADRS['bsc-weth'] = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 ADRS['dog-weth'] = "0xB7ddC6414bf4F5515b52D8BdD69973Ae205ff101";
 ABIS['weth'] = IERC20ABIS;
 ABIS['weth'] += [
-  "function deposit()",
+  "function deposit() payable",
   "function withdraw(uint)",
 ];
 // ADRS['eth-weth'] = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
@@ -257,13 +257,14 @@ for (let chainName of CHAINNAMES) {
 const DEXS = {};
 DEXS['eth'] = ['uni'];
 DEXS['bsc'] = ['pcs'];
-DEXS['dog'] = ['max', 'dog', 'yod', 'qui',];
+DEXS['dog'] = ['max', 'dog', 'yod', 'qui', 'kib',];
 
 // ADRS['eth-uni-factory'] = "0x0000000000000000000000000000000000000000"; //////////////////////////////// CHECK
 ADRS['bsc-pcs-factory'] = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
 ADRS['dog-max-factory'] = "0xb0A464937850890c48fFc01d55B6fbB1Df24D1D0";
 ADRS['dog-dog-factory'] = "0xD27D9d61590874Bf9ee2a19b27E265399929C9C3";
 ADRS['dog-yod-factory'] = "0xAaA04462e35f3e40D798331657cA015169e005d7";
+ADRS['dog-kib-factory'] = "0xF4bc79D32A7dEfd87c8A9C100FD83206bbF19Af5";
 ADRS['dog-qui-factory'] = "0xd2480162Aa7F02Ead7BF4C127465446150D58452";
 ABIS['factory'] = [
   "function getPair(address, address) view returns (address)",
@@ -284,6 +285,7 @@ ADRS['bsc-pcs-router'] = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
 ADRS['dog-max-router'] = "0x3C3E183c6664330E3D28E586Fcbc07b0332E3d15"; // stable 0.1%
 ADRS['dog-dog-router'] = "0xa4EE06Ce40cb7e8c04E127c1F7D3dFB7F7039C81"; // 0.2%
 ADRS['dog-yod-router'] = "0x72d85Ab47fBfc5E7E04a8bcfCa1601D8f8cE1a50"; // 0.5%
+ADRS['dog-kib-router'] = "0x6258c967337D3faF0C2ba3ADAe5656bA95419d5f"; // 0.3%
 ADRS['dog-qui-router'] = "0x4aE2bD0666c76C7f39311b9B3e39b53C8D7C43Ea";
 ABIS['router'] = [
   "function getAmountsOut(uint, address[]) view returns (uint[])",
