@@ -86,11 +86,11 @@ async function setToken() {
     'output': r[1] / 1,
   };
 
-  for (let target_ of ['input', 'output']) {
-    setConts(`${CURCHAIN}-${target_}-token`, CURTOKENS[target_], ABIS['token']);
-    let name = await CONTS[`${CURCHAIN}-${target_}-token`].name();
-    let symbol = await CONTS[`${CURCHAIN}-${target_}-token`].symbol();
-    let decimals = await CONTS[`${CURCHAIN}-${target_}-token`].decimals();
+  for (let target of ['input', 'output']) {
+    setConts(`${CURCHAIN}-${target}`, CURTOKENS[target], ABIS['token']);
+    let name = await CONTS[`${CURCHAIN}-${target}`].name();
+    let symbol = await CONTS[`${CURCHAIN}-${target}`].symbol();
+    let decimals = await CONTS[`${CURCHAIN}-${target}`].decimals();
     select(`#swap-${target_}-name`).innerHTML = symbol;
 
     RESERVES[target_] = RESERVES[target_] / 10**decimals;
@@ -184,11 +184,11 @@ select('#input-token-info').addEventListener('input', async (e) => {
     };
     return;
   }
-  setConts(`${CURCHAIN}-token`, adr, ABIS['token']);
+  setConts(`${CURCHAIN}-temp`, adr, ABIS['token']);
 
   let name;
   try {
-    name = await CONTS[`${CURCHAIN}-token`].name();
+    name = await CONTS[`${CURCHAIN}-temp`].name();
   } catch (e) {
     displayText('#token-info', `invalid address`);
     select('#token-info-set').onclick = async () => {
@@ -197,7 +197,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
     return;
   }
 
-  let symbol = await CONTS[`${CURCHAIN}-token`].symbol();
+  let symbol = await CONTS[`${CURCHAIN}-temp`].symbol();
   displayText('#token-info', `${name} (${symbol})`);
 
   select('#token-info-set').onclick = async () => { 
