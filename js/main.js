@@ -196,8 +196,6 @@ async function selectDex(name) {
   await setPair();
 
   await checkApprove();
-
-  
 }
 
 
@@ -312,7 +310,11 @@ async function runGlobal() {
   select(`#swap-run`).onclick = async () => { await swapRun(); };
   select(`#swap-tx`).onclick = async () => { await swapTx(); };
   select(`#swap-approve`).onclick = async () => {
-    await SEND_TX(`${CURCHAIN}-input`, 'approve', [ADRS[`dog-max-route`], UINT256MAX]);
+    let [res, data] = await SEND_TX(`${CURCHAIN}-input`, 'approve', [ADRS[`dog-max-route`], UINT256MAX]);
+    let result = await data.wait();
+    if (result.status == 1) {
+      await checkApprove();
+    }
   };
 }
 
