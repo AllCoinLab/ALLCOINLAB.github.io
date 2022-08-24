@@ -183,7 +183,7 @@ async function swapTx() {
   
   let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
-  await SEND_TX(`dog-max-router`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
+  await SEND_TX(`dog-${CURDEX}-router`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
 }
 
 
@@ -206,9 +206,9 @@ select('#conn').onclick = async () => { await conn(); };
 select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
 select(`#swap-run`).onclick = async () => { await swapRun(); };
 select(`#swap-tx`).onclick = async () => { await swapTx(); };
-select(`#swap-approve`).onclick = async () => { 
+select(`#swap-approve`).onclick = async () => {
   setConts(`${CURCHAIN}-token`, CURTOKENS['input'], ABIS['token']);
-  await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS['dog-max-router'], UINT256MAX]);
+  await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
 };
 
 
@@ -260,12 +260,35 @@ select('#input-token-info').addEventListener('input', async (e) => {
   };
 });
 
+
+async function checkAllowance(adr) {
+  if (!CURADR) {
+    alert('wallet connect first');
+    return true;
+  }
+
+  setConts(`${CURCHAIN}-temp`, adr, ABIS['token']);
+  
+  let allowance = await CONTS[`${CURCHAIN}-temp`].allowance(CURADR, ADRS[`dog-${CURDEX}-router`]);
+  if (0 < allowance) {
+    return false;
+  }
+
+  return true;
+}
+
+async function runPersonal() {
+  await checkAllowance(CURTOKENS['input']);
+}
+
 (async () => {
   await getCurAdr();
   if (CURADR == null) {
     // connect wallet button
     return;
   }
+
+  await runPersonal();
 })();
 
 
