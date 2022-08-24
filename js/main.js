@@ -313,8 +313,7 @@ async function runGlobal() {
   select(`#swap-run`).onclick = async () => { await swapRun(); };
   select(`#swap-tx`).onclick = async () => { await swapTx(); };
   select(`#swap-approve`).onclick = async () => {
-    setConts(`${CURCHAIN}-token`, CURTOKENS['input'], ABIS['token']);
-    await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
+    await SEND_TX(`${CURCHAIN}-input`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
   };
 }
 
