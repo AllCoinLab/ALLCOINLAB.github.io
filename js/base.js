@@ -298,7 +298,23 @@ for (let chainName of CHAINNAMES) {
   }
 }
 
-
+ADRS['dog-may-route'] = "0xC8994Ae93769b371551C8dfd2206AFEB877E7F2E";
+ABIS['route'] = [
+  "function getAmountsOut(address, uint, address[]) view returns (uint[])",
+  "function swapExactETHForTokensSupportingFeeOnTransferTokens(address, uint, address[], address, uint) payable",
+  "function swapExactTokensForETHSupportingFeeOnTransferTokens(address, uint, uint, address[], address, uint)",
+  "function swapExactTokensForTokensSupportingFeeOnTransferTokens(address, uint, uint, address[], address, uint)",
+];
+for (let chainName of CHAINNAMES) {
+  for (let dex of DEXS[chainName]) {
+    for (let name of ['route']) {
+      if (!(`${chainName}-${dex}-${name}` in ADRS)) {
+        continue;
+      }
+      setConts(`${chainName}-${dex}-${name}`, ADRS[`${chainName}-${dex}-${name}`], ABIS[name]);
+    }
+  }
+}
 
 // factory = pair list
 // pair list = token list
