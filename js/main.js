@@ -23,22 +23,13 @@ async function handleInput(e, id, func) {
   ot.value = SPACE(vO);
 }
 
-// // input output display, switch, buy
-// async function handleInputSwap(e, id, rI, rO) {
-//   await handleInput(e, id, async (v) => {
-//     return await v * rO / rI;
-//   });
-// }
-
-
-
-async function _setSwapRate(names) {
+async function _setSwapRate(names, vs) {
   let msg = ``;
-  msg += `1 ${names[0]} = ${ROUND(RESERVES['output'] / RESERVES['input'], 10)} ${names[1]}`;
+  msg += `1 ${names[0]} = ${ROUND(vs[1] / vs[0], 10)} ${names[1]}`;
   select('#swap-rate').innerHTML = msg;
 }
-async function setSwapRate() {
-  _setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML]);
+async function setSwapRate(vs) {
+  _setSwapRate([select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML], vs);
 }
 
 async function clearEvent(elm) {
@@ -49,14 +40,16 @@ async function clearEvent(elm) {
 async function setFuncs() {
   clearEvent(select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
-    await handleInput(e, '#swap-output-value', async (v) => {
+    await handleInput(e, '#swap-output-value', async (vI) => {
       let decimals = await CONTS[`${CURCHAIN}-input`].decimals();
-      let args = [v * 10**decimals, [CURTOKENS['input'], CURTOKENS['output']]];
+      let args = [vI * 10**decimals, [CURTOKENS['input'], CURTOKENS['output']]];
       let amounts = await CONTS[`${CURCHAIN}-${CURDEX}-router`].getAmountsOut(...args);
-      return amounts[1] / 10**(await CONTS[`${CURCHAIN}-output`].decimals());
-    });
+      let decimals_ = await CONTS[`${CURCHAIN}-output`].decimals();
+      let vO = amounts[1] / 10**decimals_;
+      await setSwapRate([vI, vO]);
 
-    select('#swap-rate').innerHTML = msg;
+      return vO;
+    });
   });
 }
 
