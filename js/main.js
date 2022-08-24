@@ -93,7 +93,9 @@ async function getPair(tI, tO) {
 async function getR(pair) {
   setConts(`t`, pair, ABIS['pair']);
   let r = await CONTS[`t`].getReserves();
-
+  if (CURTOKENS['input'] > CURTOKENS['output']) {
+    r = [r[1], r[0]];
+  }
   return [r[0] / 1, r[1] / 1];
 }
 
