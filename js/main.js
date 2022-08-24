@@ -123,7 +123,7 @@ async function setToken() {
 
   await setSwapRate();
 
-  select('#dexscreen').src += '';
+  select('#dexscreen').src = `https://dexscreener.com/dogechain/${pair}?embed=1&amp;theme=dark&amp;info=0`;
 }
 
 let RESERVES = {
