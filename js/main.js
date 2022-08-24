@@ -71,6 +71,10 @@ async function swapSwitch() {
     'input': CURTOKENS['output'], 
     'output': CURTOKENS['input'],
   };
+  BALS = {
+    'input': BALS['output'], 
+    'output': BALS['input'],
+  };
 
   await setFuncs();
 
