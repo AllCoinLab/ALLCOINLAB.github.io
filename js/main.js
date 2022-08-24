@@ -27,12 +27,12 @@ async function handleInput(e, id, func) {
   ot.value = SPACE(vO);
 }
 
-// input output display, switch, buy
-async function handleInputSwap(e, id, rI, rO) {
-  await handleInput(e, id, async (v) => {
-    return await v * rO / rI;
-  });
-}
+// // input output display, switch, buy
+// async function handleInputSwap(e, id, rI, rO) {
+//   await handleInput(e, id, async (v) => {
+//     return await v * rO / rI;
+//   });
+// }
 
 
 
@@ -53,7 +53,11 @@ async function clearEvent(elm) {
 async function setFuncs() {
   clearEvent(select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
-    await handleInputSwap(e, '#swap-output-value', RESERVES['input'], RESERVES['output']);
+    await handleInput(e, '#swap-output-value', async (v) => {
+      let args = [v, [CURTOKENS['input'], CURTOKENS['output']]];
+      let amounts = await CONTS[`${CURCHAIN}-${CURDEX}-router`].getAmountsOut(...args);
+      return amounts[1];
+    });
   });
 }
 
