@@ -211,15 +211,6 @@ async function openSelectToken(target) {
   displayText('#token-info', `no address set`);
 }
 
-select('#conn').onclick = async () => { await conn(); };
-select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
-select(`#swap-run`).onclick = async () => { await swapRun(); };
-select(`#swap-tx`).onclick = async () => { await swapTx(); };
-select(`#swap-approve`).onclick = async () => {
-  setConts(`${CURCHAIN}-token`, CURTOKENS['input'], ABIS['token']);
-  await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
-};
-
 
 select('#input-token-info').addEventListener('input', async (e) => {
   async function invalid(s) {
@@ -310,6 +301,18 @@ async function checkApprove() {
     
   }
 }
+
+async function runGlobal() {
+  select('#conn').onclick = async () => { await conn(); };
+  select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
+  select(`#swap-run`).onclick = async () => { await swapRun(); };
+  select(`#swap-tx`).onclick = async () => { await swapTx(); };
+  select(`#swap-approve`).onclick = async () => {
+    setConts(`${CURCHAIN}-token`, CURTOKENS['input'], ABIS['token']);
+    await SEND_TX(`${CURCHAIN}-token`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
+  };
+}
+
 async function runPersonal() {
   clickable('#conn', false);
   select('#conn').innerHTML = SHORTADR(CURADR);
@@ -318,6 +321,8 @@ async function runPersonal() {
 }
 
 (async () => {
+  await runGlobal();
+
   await getCurAdr();
   if (CURADR == null) {
     // connect wallet button
