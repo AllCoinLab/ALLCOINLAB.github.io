@@ -280,11 +280,11 @@ async function checkAllowance(adr) {
 async function clickable(id, b) {
   if (b) {
     // select(id).classList.remove('pe-none'); // not working
-    select(id).style.pointEvent = 'pointer';
+    select(id).style.pointerEvents = 'auto';
     select(id).classList.add('btn-primary');
   } else {
     // select(id).classList.add('pe-none');
-    select(id).style.pointEvent = 'none';
+    select(id).style.pointerEvents = 'none';
     select(id).classList.remove('btn-primary')
   }
 }
