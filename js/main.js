@@ -72,7 +72,9 @@ async function swapSwitch() {
     'output': CURTOKENS['input'],
   };
 
-  await setToken();
+  await setFuncs();
+
+  await setSwapRate();
 
   await checkApprove();
 }
@@ -95,6 +97,7 @@ async function getR(pair) {
   return [r[0] / 1, r[1] / 1];
 }
 
+// pair based, token based
 async function setToken() {
   let [res, data] = await getPair(CURTOKENS['input'], CURTOKENS['output']);
   if (res) {
