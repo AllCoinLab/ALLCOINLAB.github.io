@@ -327,6 +327,11 @@ async function runGlobal() {
   };
 }
 
+async function runAnon() {
+  clickable('#conn', true);
+  select('#conn').innerHTML = "Connect Wallet";
+}
+
 let BALS = {};
 async function runPersonal() {
   clickable('#conn', false);
@@ -347,15 +352,13 @@ async function runPersonal() {
   await runGlobal();
 
   await getCurAdr();
-  if (CURADR == null) {
-    // connect wallet button
-    clickable('#conn', true);
-    select('#conn').innerHTML = "Connect Wallet";
-
-    return;
+  if (CURADR) {
+    await runPersonal();
+  } else {
+    await runAnon();
   }
 
-  await runPersonal();
+  $('[data-bs-toggle="tooltip"]').tooltip();
 })();
 
 
