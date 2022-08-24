@@ -195,9 +195,11 @@ async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
 
+  await setToken();
+
   await checkApprove();
 
-  await setToken();
+  
 }
 
 
@@ -263,7 +265,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
 
-    setToken();
+    await setToken();
 
     if (CURSETTARGET == 'input') {
       await checkApprove();
