@@ -148,7 +148,7 @@ const CHAINNAMES = KEYS(CHAINIDS);
 
 
 const BNBDIV = 10**18;
-const UINT256MAX = 2**256 - 1;
+const UINT256MAX = ethers.constants.MaxUint256;
 
 const ADRS = {};
 const ABIS = {};
