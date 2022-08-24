@@ -75,7 +75,7 @@ async function swapSwitch() {
     'output': CURTOKENS['input'],
   };
 
-  await setFuncs();
+  await setToken();
 }
 
 
@@ -99,7 +99,7 @@ async function setToken() {
     RESERVES[target] = RESERVES[target] / 10**decimals;
   }
   
-  await setSwapRate();
+  await setFuncs();
 }
 
 let RESERVES = {
@@ -187,7 +187,7 @@ select(`#swap-approve`).onclick = async () => {
 select('#input-token-info').addEventListener('input', async (e) => {
   let adr;
   try {
-    adr = ADR(e.target.value);
+    adr = ADR(e.target.value, false);
   } catch (e) {
     displayText('#token-info', `invalid address`);
     select('#token-info-set').onclick = async () => {
