@@ -79,7 +79,7 @@ async function swapSwitch() {
 }
 
 
-async function checkReserves(tI, tO) {
+async function getPair(tI, tO) {
   let pair = await CONTS[`dog-${CURDEX}-factory`].getPair(tI, tO);
   if (pair == "0x0000000000000000000000000000000000000000") {
     return [true, [pair]];
@@ -89,29 +89,25 @@ async function checkReserves(tI, tO) {
   return [false, [pair]];
 }
 
-async function getReserves() {
-  let [res, data] = await checkReserves(CURTOKENS['input'], CURTOKENS['output']);
-  if (res) {
-    return [true, data];
-  }
-  let pair = data[0];
+async function getR(pair) {
+  setConts(`t`, pair, ABIS['pair']);
+  let r = await CONTS[`t`].getReserves();
 
-  setConts(`${CURCHAIN}-pair`, pair, ABIS['pair']);
-  let r = await CONTS[`${CURCHAIN}-pair`].getReserves();
-  RESERVES = {
-    'input': r[0] / 1,
-    'output': r[1] / 1,
-  };
-
-  return [false, data];
+  return [r[0] / 1, r[1] / 1];
 }
 
 async function setToken() {
-  let [res, data] = await getReserves();
+  let [res, data] = await getPair(CURTOKENS['input'], CURTOKENS['output']);
   if (res) {
     return [true, data];
   }
-
+  
+  let r = await getR(pair);
+  RESERVES = {
+    'input': r[0],
+    'output': r[1],
+  };
+  
   for (let target of ['input', 'output']) {
     setConts(`${CURCHAIN}-${target}`, CURTOKENS[target], ABIS['token']);
     // let name = await CONTS[`${CURCHAIN}-${target}`].name();
@@ -214,14 +210,17 @@ select(`#swap-approve`).onclick = async () => {
 
 
 select('#input-token-info').addEventListener('input', async (e) => {
+  async function invalid(s) {
+    displayText('#token-info', s);
+    select('#token-info-set').onclick = async () => {
+      alert(s);
+    };
+  }
   let adr;
   try {
     adr = ADR(e.target.value, false);
   } catch (e) {
-    displayText('#token-info', `invalid address`);
-    select('#token-info-set').onclick = async () => {
-      alert('invalid address');
-    };
+    await invalid(`invalid address`);
     return;
   }
   setConts(`${CURCHAIN}-temp`, adr, ABIS['token']);
@@ -230,10 +229,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
   try {
     name = await CONTS[`${CURCHAIN}-temp`].name();
   } catch (e) {
-    displayText('#token-info', `invalid address`);
-    select('#token-info-set').onclick = async () => {
-      alert('invalid address');
-    };
+    await invalid(`invalid address`);
     return;
   }
 
@@ -247,19 +243,16 @@ select('#input-token-info').addEventListener('input', async (e) => {
     } else {
       adrs = [CURTOKENS['input'], adr];
     }
-    let [res, data] = await checkReserves(adrs[0], adrs[1]);
+    let [res, data] = await getPair(adrs[0], adrs[1]);
     if (res) {
-      displayText('#token-info', `${name} (${symbol}) [NO PAIR]`);
-      select('#token-info-set').onclick = async () => {
-        alert('NO PAIR');
-      };
+      await invalid(`${name} (${symbol}) [NO PAIR]`);
       return;
     }
   }
 
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
-    let [res, data] = await getReserves();
+
     setToken();
   };
 });
