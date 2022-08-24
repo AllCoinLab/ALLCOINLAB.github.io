@@ -99,6 +99,7 @@ async function getR(pair) {
 async function setToken() {
   let [res, data] = await getPair(CURTOKENS['input'], CURTOKENS['output']);
   if (res) {
+    displayText('#swap-rate', 'no pair');
     return [true, data];
   }
   let pair = data[0];
@@ -195,6 +196,8 @@ async function selectDex(name) {
   CURDEX = name;
 
   await checkApprove();
+
+  await setToken();
 }
 
 
