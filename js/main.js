@@ -76,6 +76,11 @@ async function swapSwitch() {
     'output': BALS['input'],
   };
 
+  // display method?
+  for (let target of ['input', 'output']) {
+    displayText(`#${target}-balance`, ROUND(BALS[target], 3));
+  }
+
   await setFuncs();
 
   await setSwapRate();
