@@ -42,7 +42,7 @@ async function setFuncs() {
   select(`#swap-input-value`).addEventListener('input', async (e) => {
     await handleInput(e, '#swap-output-value', async (vI) => {
       let decimals = await CONTS[`${CURCHAIN}-input`].decimals();
-      let args = [vI * 10**decimals, [CURTOKENS['input'], CURTOKENS['output']]];
+      let args = [BIGINT(vI * 10**decimals), [CURTOKENS['input'], CURTOKENS['output']]];
       let amounts = await CONTS[`${CURCHAIN}-${CURDEX}-router`].getAmountsOut(...args);
       let decimals_ = await CONTS[`${CURCHAIN}-output`].decimals();
       let vO = amounts[1] / 10**decimals_;
