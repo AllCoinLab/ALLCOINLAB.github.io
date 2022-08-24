@@ -259,6 +259,10 @@ select('#input-token-info').addEventListener('input', async (e) => {
     CURTOKENS[CURSETTARGET] = adr;
 
     setToken();
+
+    if (CURSETTARGET == 'input') {
+      await needApprove();
+    }
   };
 });
 
