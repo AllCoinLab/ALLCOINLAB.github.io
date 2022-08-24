@@ -191,6 +191,8 @@ async function swapTx() {
 async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
+
+  await needApprove();
 }
 
 
@@ -277,10 +279,7 @@ async function checkAllowance(adr) {
   return true;
 }
 
-async function runPersonal() {
-  select('#conn').classList.remove('btn-primary');
-  select('#conn').innerHTML = SHORTADR(CURADR);
-
+async function needApprove() {
   let allowance = await checkAllowance(CURTOKENS['input']);
   if (allowance) {
     select('#swap-approve').classList.add('btn-primary');
@@ -289,6 +288,12 @@ async function runPersonal() {
     select('#swap-approve').classList.remove('btn-primary');
     select('#swap-approve').innerHTML = 'Approved';
   }
+}
+async function runPersonal() {
+  select('#conn').classList.remove('btn-primary');
+  select('#conn').innerHTML = SHORTADR(CURADR);
+
+  await needApprove();
 }
 
 (async () => {
