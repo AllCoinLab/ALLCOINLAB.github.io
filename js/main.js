@@ -57,7 +57,6 @@ async function setFuncs() {
   });
 }
 
-let STATES = {};
 async function swapSwitch() {
   let names = [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML];
   [select(`#swap-input-name`).innerHTML, select(`#swap-output-name`).innerHTML] = SWAP(names);
@@ -146,13 +145,6 @@ let CURTOKENS = {
   'input': ADRS['dog-usdc'],
   'output': ADRS['dog-usdt'],
 };
-
-
-STATES['swap'] = true;
-(async () => {
-  await setToken();
-	await swapSwitch();
-})();
 
 async function swapRun() {
   let aI = select(`#swap-input-value`).value.replace(/ /g, '');
@@ -303,6 +295,8 @@ async function checkApprove() {
 }
 
 async function runGlobal() {
+  await setToken();
+  
   select('#conn').onclick = async () => { await conn(); };
   select(`#swap-switch`).onclick = async () => { await swapSwitch(); };
   select(`#swap-run`).onclick = async () => { await swapRun(); };
