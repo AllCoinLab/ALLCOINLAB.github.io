@@ -181,9 +181,9 @@ async function swapTx() {
     return;
   }
   
-  let args = [aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
+  let args = [ADRS[`dog-${CURDEX}-factory`], aI, INT(aO * 0.97), [CURTOKENS['input'], CURTOKENS['output']], CURADR, NOW() + 1000];
   l(args);
-  await SEND_TX(`dog-${CURDEX}-router`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
+  await SEND_TX(`dog-max-route`, 'swapExactTokensForTokensSupportingFeeOnTransferTokens', args);
 }
 
 
@@ -271,7 +271,7 @@ async function checkAllowance(adr) {
 
   setConts(`${CURCHAIN}-temp`, adr, ABIS['token']);
   
-  let allowance = await CONTS[`${CURCHAIN}-temp`].allowance(CURADR, ADRS[`dog-${CURDEX}-router`]);
+  let allowance = await CONTS[`${CURCHAIN}-temp`].allowance(CURADR, ADRS[`dog-max-route`]);
   if (0 < allowance) {
     return false;
   }
@@ -313,7 +313,7 @@ async function runGlobal() {
   select(`#swap-run`).onclick = async () => { await swapRun(); };
   select(`#swap-tx`).onclick = async () => { await swapTx(); };
   select(`#swap-approve`).onclick = async () => {
-    await SEND_TX(`${CURCHAIN}-input`, 'approve', [ADRS[`dog-${CURDEX}-router`], UINT256MAX]);
+    await SEND_TX(`${CURCHAIN}-input`, 'approve', [ADRS[`dog-max-route`], UINT256MAX]);
   };
 }
 

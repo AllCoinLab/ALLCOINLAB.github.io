@@ -298,7 +298,7 @@ for (let chainName of CHAINNAMES) {
   }
 }
 
-ADRS['dog-may-route'] = "0xC8994Ae93769b371551C8dfd2206AFEB877E7F2E";
+ADRS['dog-max-route'] = "0xC8994Ae93769b371551C8dfd2206AFEB877E7F2E";
 ABIS['route'] = [
   "function getAmountsOut(address, uint, address[]) view returns (uint[])",
   "function swapExactETHForTokensSupportingFeeOnTransferTokens(address, uint, address[], address, uint) payable",
