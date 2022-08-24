@@ -210,9 +210,8 @@ async function openSelectToken(target) {
 select('#input-token-info').addEventListener('input', async (e) => {
   async function invalid(s) {
     displayText('#token-info', s);
-    select('#token-info-set').onclick = async () => {
-      alert(s);
-    };
+    clickable('#token-info-set', false);
+    select('#token-info-set').innerHTML = 'Invalid';
   }
   let adr;
   try {
@@ -248,6 +247,8 @@ select('#input-token-info').addEventListener('input', async (e) => {
     }
   }
 
+  clickable('#token-info-set', true);
+  select('#token-info-set').innerHTML = 'Select';
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
 
