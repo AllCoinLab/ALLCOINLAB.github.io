@@ -333,7 +333,7 @@ async function runPersonal() {
     let decimals = await CONTS[`${CURCHAIN}-${target}`].decimals();
     BALS[target] = bal / 10**decimals;
 
-    displayText(target, ROUND(BALS[target], 3));
+    displayText(`#${target}-balance`, ROUND(BALS[target], 3));
   }
 }
 
