@@ -53,7 +53,7 @@ async function setFuncs() {
       let decimals = await CONTS[`${CURCHAIN}-input`].decimals();
       let args = [v * 10**decimals, [CURTOKENS['input'], CURTOKENS['output']]];
       let amounts = await CONTS[`${CURCHAIN}-${CURDEX}-router`].getAmountsOut(...args);
-      return amounts[1];
+      return amounts[1] / 10**(await CONTS[`${CURCHAIN}-input`].decimals());
     });
   });
 }
