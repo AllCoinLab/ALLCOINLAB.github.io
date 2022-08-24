@@ -74,6 +74,8 @@ async function swapSwitch() {
   };
 
   await setToken();
+
+  await checkApprove();
 }
 
 
@@ -192,7 +194,7 @@ async function selectDex(name) {
   displayText('#dex-type', DEX_NAMES['dog'][name]);
   CURDEX = name;
 
-  await needApprove();
+  await checkApprove();
 }
 
 
@@ -261,7 +263,7 @@ select('#input-token-info').addEventListener('input', async (e) => {
     setToken();
 
     if (CURSETTARGET == 'input') {
-      await needApprove();
+      await checkApprove();
     }
   };
 });
@@ -292,7 +294,7 @@ async function clickable(id, b) {
     select(id).classList.remove('btn-primary')
   }
 }
-async function needApprove() {
+async function checkApprove() {
   let allowance = await checkAllowance(CURTOKENS['input']);
   if (allowance) {
     clickable('#swap-approve', true);
@@ -307,7 +309,7 @@ async function runPersonal() {
   clickable('#conn', false);
   select('#conn').innerHTML = SHORTADR(CURADR);
 
-  await needApprove();
+  await checkApprove();
 }
 
 (async () => {
