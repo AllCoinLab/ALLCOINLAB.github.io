@@ -205,7 +205,7 @@ async function addNetwork(name) {
             symbol: MAINCOINS[name][1],
             decimals: MAINCOINS[name][2],
         },
-        blockExplorerUrls: EXPLORERS[name];
+        blockExplorerUrls: EXPLORERS[name],
 		}],
 	});
 }
