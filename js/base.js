@@ -854,6 +854,16 @@ function makeElem(elemType, elemId = null, elemClass = null) {
   return elem;
 }
 
+function spin(target, on) {
+  let elm = select(target);
+  if (on) {
+	  let elm_ = makeElem('span', 'spinner', 'spin spinner');
+    elm.innerHTML += elm;
+  } else {
+    select('#spinner').remove();
+  }
+}
+
 if (isBrowser) {
   let nullDiv = makeElem('div', 'NULL', null);
   nullDiv.style.width = '1px';
