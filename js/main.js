@@ -209,15 +209,15 @@ async function openSelectToken(target) {
 }
 
 
-select('#input-token-info').addEventListener('input', async (e) => {
+let wdoge = true;
+async function checkToken(adr) {
   async function invalid(s) {
     displayText('#token-info', s);
     clickable('#token-info-set', false);
     select('#token-info-set').innerHTML = 'Invalid';
   }
-  let adr;
   try {
-    adr = ADR(e.target.value, false);
+    adr = ADR(adr, false);
   } catch (e) {
     await invalid(`invalid address`);
     return;
@@ -253,9 +253,16 @@ select('#input-token-info').addEventListener('input', async (e) => {
   select('#token-info-set').innerHTML = 'Select';
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
-
+    
+    if (adr == ADRS[`${CURCHAIN}-wwdoge`]) {
+      wdoge = true;
+    }
     await setPair();
   };
+}
+
+select('#input-token-info').addEventListener('input', async (e) => {
+  await checkToken(e.target.value);
 });
 
 
@@ -297,6 +304,16 @@ async function checkApprove() {
     clickable('#swap-run', true);
     displayText('#swap-run', 'Swap');
   }
+}
+
+async function setToken(name) {
+  let adr;
+  if (name == 'wdoge') {
+    adr = ADRS[`${CURCHAIN}-wwdoge`];
+  } else {
+    adr = ADRS[`${CURCHAIN}-${name}`];
+  }
+  await checkToken(adr);
 }
 
 async function runGlobal() {
