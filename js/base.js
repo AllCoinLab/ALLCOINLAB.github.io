@@ -729,25 +729,10 @@ async function READ_TX(name, method, args, popup=true, overrides=null) {
 
 
 
-async function READ_TX_(adr, name, method, params, suffixs, args) {
-  ADRS[name] = adr;
-  if (!(name in ABIS)) {
-    ABIS[name] = [];
-  }
-
-  if (name in CONTS) {
-    if (!(method in CONTS[name])) {
-      let abiStr = `function ${method}${params} ${suffixs}`;
-      ABIS[name].push(abiStr);
-    }
-  }
-  
-  setConts(name, ADRS[name], ABIS[name]);
-  
-  let [res, data] = await READ_TX(name, method, args);
-  return [res, data];
+async function CUSTOM_TX(adr, abi, method, args) {
+	let cont = new ethers.Contract(adr, [abi], PROVIDER);
+	return await cont[method](...args);
 }
-
 
 async function GAS(name, method, args, value=null, popup=true, overrides=null) {
   overrides = await getOverrides(overrides);
