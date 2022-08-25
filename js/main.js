@@ -254,7 +254,7 @@ async function checkToken(adr) {
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
     
-    if (adr == ADRS[`${CURCHAIN}-wwdoge`]) {
+    if (adr == ADRS[`${CURCHAIN}-weth`]) {
       wdoge = true;
     }
     await setPair();
@@ -309,7 +309,7 @@ async function checkApprove() {
 async function setToken(name) {
   let adr;
   if (name == 'wdoge') {
-    adr = ADRS[`${CURCHAIN}-wwdoge`];
+    adr = ADRS[`${CURCHAIN}-weth`];
   } else {
     adr = ADRS[`${CURCHAIN}-${name}`];
   }
