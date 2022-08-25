@@ -858,7 +858,7 @@ function spin(target, on) {
   let elm = select(target);
   if (on) {
 	  let elm_ = makeElem('span', 'spinner', 'spin spinner');
-    elm.innerHTML += elm;
+    elm.append(elm_);
   } else {
     select('#spinner').remove();
   }
