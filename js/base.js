@@ -145,7 +145,17 @@ const CHAINIDS = {
   'dog': 2000,
 };
 const CHAINNAMES = KEYS(CHAINIDS);
+const CHAINFULLNAMES = {
+	'eth': 'ethereum',
+	'bsc': 'binance smart chain',
+	'dog': 'dogechain',
+};
 
+const MAINCOINS = {
+	'eth': ['ethereum', 'ETH', 18],
+	'bsc': ['BNB', 'BNB', 18],
+	'dog': ['Wrapped DOGE', 'wDOGE', 18],
+};
 
 const BNBDIV = 10**18;
 const UINT256MAX = ethers.constants.MaxUint256;
@@ -174,27 +184,67 @@ let RPCS = {
   ],
 };
 
-let PROVIDER;
+let EXPLORERS = {
+	'bsc': [
+		"https://bscscan.com",
+	],
+	'dog': [
+		"https://explorer.dogechain.dog",
+	],
+};
+
+async function addNetwork(name) {
+	await window.ethereum.request({
+    method: "wallet_addEthereumChain",
+    params: [{
+        chainId: ethers.utils.hexValue(CHAINIDS[name]),
+        rpcUrls: RPCS[name],
+        chainName: CHAINFULLNAMES[name],
+        nativeCurrency: {
+            name: MAINCOINS[name][0],
+            symbol: MAINCOINS[name][1],
+            decimals: MAINCOINS[name][2],
+        },
+        blockExplorerUrls: EXPLORERS[name];
+		}],
+	});
+}
+
+async function changeNetwork(name) {
+	await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+		params: [{ 
+			chainId: ethers.utils.hexValue(CHAINIDS[name]),
+			rpcUrls: RPCS[name],
+		}],
+	});
+}
+
 let CURCHAINID;
-if (isBrowser) {
-  if (window.ethereum) {
-    PROVIDER = new ethers.providers.Web3Provider(window.ethereum);
-    (async function () {
-      let network = await PROVIDER.getNetwork();
-      CURCHAINID = network['chainId'];
-    })();
-  }
+let PROVIDER;
+let SIGNER;
+function setNetwork(name) { // isBrowser
+	async function () {
+		if (window.ethereum) {
+			await addNetwork(name);
+			await changeNetwork(name);
+			PROVIDER = new ethers.providers.Web3Provider(window.ethereum);
+		} else {
+			PROVIDER = new ethers.providers.JsonRpcProvider(RPCS[name][0], {
+				chainId: ethers.utils.hexValue(CHAINIDS[name]),
+				rpcUrls: RPCS[name],
+			});
+		}
+		let network = await PROVIDER.getNetwork();
+		CURCHAINID = network['chainId'];
+
+		SIGNER = PROVIDER.getSigner();
+	})();
 }
 
-if (typeof PROVIDER === 'undefined') { // default chain bsc
-  let params = {
-    chainId: CHAINIDS['bsc'],
-    rpcUrls: RPCS['bsc'],
-  };
-  PROVIDER = new ethers.providers.JsonRpcProvider(RPCS['bsc'][0], params); // rpc set first
-}
+setNetwork('bsc'); // bsc default
 
-const SIGNER = PROVIDER.getSigner();
+
 
 const IERC20ABIS = [
   "function name() view returns (string)",
