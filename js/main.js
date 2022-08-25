@@ -332,7 +332,7 @@ async function runGlobal() {
   };
   
   for (name of ['wdoge', 'usdc', 'usdt']) {
-    select(`#select-${name}`).onclick = async () => { await setToken(name); };
+    select(`#select-${name}`).onclick = async (e) => { await setToken(e.target.id.split('-')[1]); };
   }
 }
 
