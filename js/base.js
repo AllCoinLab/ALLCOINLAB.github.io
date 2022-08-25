@@ -224,7 +224,7 @@ let CURCHAINID;
 let PROVIDER;
 let SIGNER;
 function setNetwork(name=null) { // isBrowser
-	async function () {
+	(async function () {
 		if (window.ethereum) {
       if (name) {
 			  await addNetwork(name);
