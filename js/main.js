@@ -330,6 +330,10 @@ async function runGlobal() {
       await checkApprove();
     }
   };
+  
+  for (name of ['wdoge', 'usdc', 'usdt']) {
+    select(`#select-${name}`).onclick = async () => { await setToken(name); };
+  }
 }
 
 async function runAnon() {
