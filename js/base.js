@@ -223,14 +223,19 @@ async function changeNetwork(name) {
 let CURCHAINID;
 let PROVIDER;
 let SIGNER;
-function setNetwork(name) { // isBrowser
+function setNetwork(name=null) { // isBrowser
 	async function () {
 		if (window.ethereum) {
-			await addNetwork(name);
-			await changeNetwork(name);
+      if (name) {
+			  await addNetwork(name);
+			  await changeNetwork(name);
+      }
 			PROVIDER = new ethers.providers.Web3Provider(window.ethereum);
 		} else {
-			PROVIDER = new ethers.providers.JsonRpcProvider(RPCS[name][0], {
+			if (!name) {
+        name = 'bsc'; // bsc default
+      }
+      PROVIDER = new ethers.providers.JsonRpcProvider(RPCS[name][0], {
 				chainId: ethers.utils.hexValue(CHAINIDS[name]),
 				rpcUrls: RPCS[name],
 			});
@@ -242,7 +247,7 @@ function setNetwork(name) { // isBrowser
 	})();
 }
 
-setNetwork('bsc'); // bsc default
+setNetwork();
 
 
 
