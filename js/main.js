@@ -212,13 +212,13 @@ async function openSelectToken(target) {
 }
 
 
-let wdoge = true;
 async function checkToken(adr) {
   async function invalid(s) {
     displayText('#token-info', s);
     clickable('#token-info-set', false);
     select('#token-info-set').innerHTML = 'Invalid';
   }
+  
   try {
     adr = ADR(adr, false);
   } catch (e) {
@@ -257,9 +257,6 @@ async function checkToken(adr) {
   select('#token-info-set').onclick = async () => { 
     CURTOKENS[CURSETTARGET] = adr;
     
-    if (adr == ADRS[`${CURCHAIN}-weth`]) {
-      wdoge = true;
-    }
     await setPair();
   };
 }
@@ -309,9 +306,11 @@ async function checkApprove() {
   }
 }
 
+let useEth = false;
 async function setToken(name) {
   let adr;
   if (name == 'wdoge') {
+    useEth = true;
     adr = ADRS[`${CURCHAIN}-weth`];
   } else {
     adr = ADRS[`${CURCHAIN}-${name}`];
@@ -334,7 +333,7 @@ async function runGlobal() {
     }
   };
   
-  for (name of ['wdoge', 'usdc', 'usdt']) {
+  for (name of ['wdoge', 'weth', 'usdc', 'usdt']) {
     select(`#select-${name}`).onclick = async (e) => { await setToken(e.target.id.split('-')[1]); };
   }
 }
