@@ -71,14 +71,17 @@ async function swapSwitch() {
     'input': CURTOKENS['output'], 
     'output': CURTOKENS['input'],
   };
-  BALS = {
-    'input': BALS['output'], 
-    'output': BALS['input'],
-  };
+  
+  if (CURADR) {
+    BALS = {
+      'input': BALS['output'], 
+      'output': BALS['input'],
+    };
 
-  // display method?
-  for (let target of ['input', 'output']) {
-    displayText(`#${target}-balance`, ROUND(BALS[target], 3));
+    // display method?
+    for (let target of ['input', 'output']) {
+      displayText(`#${target}-balance`, ROUND(BALS[target], 3));
+    }
   }
 
   await setFuncs();
@@ -341,7 +344,10 @@ async function runAnon() {
   select('#conn').innerHTML = "Connect Wallet";
 }
 
-let BALS = {};
+let BALS = {
+  'input': 0,
+  'output': 0,
+};
 async function runPersonal() {
   clickable('#conn', false);
   select('#conn').innerHTML = SHORTADR(CURADR);
