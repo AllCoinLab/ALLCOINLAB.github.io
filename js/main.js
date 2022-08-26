@@ -38,9 +38,9 @@ async function clearEvent(elm) {
 }
 
 async function setFuncs() {
-  await checkApprove();
-
   await setSwapRate([RESERVES['input'], RESERVES['output']]);
+  
+  await checkApprove();  
 
   clearEvent(select(`#swap-input-value`));
   select(`#swap-input-value`).addEventListener('input', async (e) => {
@@ -261,7 +261,7 @@ async function checkToken(adr) {
   };
 }
 
-select('#input-token-info').addEventListener('input', async (e) => {
+select('#input-token-info').addEventListener('input', async (e) => { //////////////////////////////// check other dex in background
   await checkToken(e.target.value);
 });
 
